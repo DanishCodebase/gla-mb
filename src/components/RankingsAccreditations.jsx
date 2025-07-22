@@ -51,7 +51,7 @@ const accreditationLogos = [
 export function RankingsAccreditations() {
   return (
     <section className="py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-      <div className="container mx-auto px-4">
+      <div className="container max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
@@ -75,7 +75,7 @@ export function RankingsAccreditations() {
                 <img
                   src={logo.image}
                   alt={logo.alt}
-                  className="object-contain w-full h-full px-8 py-1 rounded-md"
+                  className="object-contain w-full h-full px-8 py-2 sm:py-1 rounded-md"
                   loading="lazy"
                 />
               </div>
