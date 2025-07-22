@@ -48,6 +48,54 @@ const accreditationLogos = [
   },
 ];
 
+const accreditationLogosMobile = [
+  {
+    name: "WES",
+    image: "/c-wes.jpg",
+    alt: "World Education Services",
+  },
+  {
+    name: "UGC",
+    image: "/c-ugc.jpg",
+    alt: "University Grants Commission",
+  },
+  {
+    name: "Times Higher Education",
+    image: "/c-times.jpg",
+    alt: "THE World University Rankings",
+  },
+  {
+    name: "NIRF",
+    image: "/c-nirf.jpg",
+    alt: "National Institutional Ranking Framework",
+  },
+  {
+    name: "NAAC",
+    image: "/c-naac.jpg",
+    alt: "National Assessment and Accreditation Council",
+  },
+  {
+    name: "IAU",
+    image: "/c-iau.jpg",
+    alt: "International Association of Universities",
+  },
+  {
+    name: "IACBE",
+    image: "/c-iacb.jpg",
+    alt: "International Accreditation Council for Business Education",
+  },
+  {
+    name: "Association of Indian Universities",
+    image: "/c-aiu.jpg",
+    alt: "AIU Accreditation",
+  },
+  {
+    name: "ACCA Think Ahead",
+    image: "/c-acca.jpg",
+    alt: "ACCA Think Ahead Accreditation",
+  },
+];
+
 export function RankingsAccreditations() {
   return (
     <section className="py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
@@ -66,8 +114,23 @@ export function RankingsAccreditations() {
         {/* Marquee Container */}
         <div className="relative">
           {/* First Marquee - Forward Direction */}
-          <Marquee className="mb-8" pauseOnHover={true} repeat={3}>
+          <Marquee className="mb-8" pauseOnHover={true}>
             {accreditationLogos.map((logo, index) => (
+              <div
+                key={`forward-${index}`}
+                className="flex flex-col items-center justify-center mx-2 w-full bg-white rounded-md shadow-sm hover:shadow-md transition-all duration-300 h-20"
+              >
+                <img
+                  src={logo.image}
+                  alt={logo.alt}
+                  className="object-contain w-full h-full px-8 py-2 sm:py-1 rounded-md"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </Marquee>
+          <Marquee className="mb-8 sm:hidden" reverse={true} pauseOnHover={true}>
+            {accreditationLogosMobile.map((logo, index) => (
               <div
                 key={`forward-${index}`}
                 className="flex flex-col items-center justify-center mx-2 w-full bg-white rounded-md shadow-sm hover:shadow-md transition-all duration-300 h-20"
