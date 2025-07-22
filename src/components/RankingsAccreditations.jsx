@@ -55,19 +55,14 @@ const accreditationLogosMobile = [
     alt: "World Education Services",
   },
   {
-    name: "UGC",
-    image: "/c-ugc.jpg",
-    alt: "University Grants Commission",
-  },
-  {
     name: "Times Higher Education",
     image: "/c-times.jpg",
     alt: "THE World University Rankings",
   },
   {
-    name: "NIRF",
-    image: "/c-nirf.jpg",
-    alt: "National Institutional Ranking Framework",
+    name: "UGC",
+    image: "/c-ugc.jpg",
+    alt: "University Grants Commission",
   },
   {
     name: "NAAC",
@@ -75,9 +70,9 @@ const accreditationLogosMobile = [
     alt: "National Assessment and Accreditation Council",
   },
   {
-    name: "IAU",
-    image: "/c-iau.jpg",
-    alt: "International Association of Universities",
+    name: "NIRF",
+    image: "/c-nirf.jpg",
+    alt: "National Institutional Ranking Framework",
   },
   {
     name: "IACBE",
@@ -85,14 +80,19 @@ const accreditationLogosMobile = [
     alt: "International Accreditation Council for Business Education",
   },
   {
-    name: "Association of Indian Universities",
-    image: "/c-aiu.jpg",
-    alt: "AIU Accreditation",
+    name: "IAU",
+    image: "/c-iau.jpg",
+    alt: "International Association of Universities",
   },
   {
     name: "ACCA Think Ahead",
     image: "/c-acca.jpg",
     alt: "ACCA Think Ahead Accreditation",
+  },
+  {
+    name: "Association of Indian Universities",
+    image: "/c-aiu.jpg",
+    alt: "AIU Accreditation",
   },
 ];
 
@@ -129,7 +129,11 @@ export function RankingsAccreditations() {
               </div>
             ))}
           </Marquee>
-          <Marquee className="mb-8 sm:hidden" reverse={true} pauseOnHover={true}>
+          <Marquee
+            className="mb-8 sm:hidden"
+            reverse={true}
+            pauseOnHover={true}
+          >
             {accreditationLogosMobile.map((logo, index) => (
               <div
                 key={`forward-${index}`}
