@@ -118,36 +118,6 @@ export default function WhyGLATestimonial() {
               ))}
             </div>
           </div>
-
-          {/* Mobile & Tablet: Horizontal scroll */}
-          <div className="lg:hidden">
-            <div
-              className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide"
-              style={{
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
-                WebkitScrollbar: { display: "none" },
-              }}
-            >
-              {features.map((feature, index) => (
-                <div
-                  key={feature.id}
-                  className="cursor-pointer transition-all duration-300 hover:scale-105 flex flex-col items-center flex-shrink-0"
-                  onClick={() => handleAvatarClick(index)}
-                >
-                  <div className="relative w-16 h-16 sm:w-18 sm:h-18 rounded-full overflow-hidden mb-3">
-                    <Image src={feature.image || "/placeholder.svg"} alt={feature.name} fill className="object-cover" />
-                  </div>
-                  <div className="text-center min-h-[50px] flex flex-col justify-center w-24">
-                    <div className="text-xs font-medium text-white mb-1 leading-tight">{feature.name}</div>
-                    <div className="text-xs text-gray-400 leading-tight">{feature.title}</div>
-                  </div>
-                  {/* Active indicator */}
-                  {activeIndex === index && <div className="w-full h-0.5 bg-orange-500 mt-2 rounded-full" />}
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Carousel */}
@@ -163,7 +133,7 @@ export default function WhyGLATestimonial() {
             <CarouselContent>
               {features.map((feature, index) => (
                 <CarouselItem key={feature.id}>
-                  <Card className="bg-transparent border border-gray-800 rounded-xl mx-4">
+                  <Card className="bg-transparent border border-gray-800 rounded-xl sm:mx-4">
                     <CardContent className="">
                       <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
                         {/* Large Profile Image */}
@@ -197,8 +167,8 @@ export default function WhyGLATestimonial() {
             </CarouselContent>
 
             {/* Navigation Arrows */}
-            <CarouselPrevious className="left-1 sm:left-2 bg-gray-800/80 border-gray-600 text-white hover:bg-gray-700 w-8 h-8 sm:w-10 sm:h-10" />
-            <CarouselNext className="right-1 sm:right-2 bg-gray-800/80 border-gray-600 text-white hover:bg-gray-700 w-8 h-8 sm:w-10 sm:h-10" />
+            <CarouselPrevious className="left-[-10px] sm:left-2 bg-gray-800/80 border-gray-600 text-white hover:bg-gray-700 w-8 h-8 z-10" />
+            <CarouselNext className="right-[-10px] sm:right-2 bg-gray-800/80 border-gray-600 text-white hover:bg-gray-700 w-8 h-8 z-10" />
           </Carousel>
         </div>
       </div>
