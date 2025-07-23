@@ -4,6 +4,7 @@ import WhyGLA from "@/components/WhyGLA";
 import { Recruiters } from "@/components/Recruiters";
 import Testimonials from "@/components/Testimonials";
 import { OrbitingCircle } from "@/components/OrbitingCircle";
+import JourneyAtGLA from "@/components/JourneyAtGLA";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <WhyGLA />
       <Recruiters />
       <Testimonials />
+      <JourneyAtGLA />
       <OrbitingCircle />
     </main>
   );
