@@ -51,7 +51,7 @@ const programs = [
     color: "text-orange-600",
     bgColor: "bg-white",
     hoverColor: "bg-orange-100",
-    image: "/team.png"
+    image: "/team.png",
   },
   {
     id: 6,
@@ -59,7 +59,7 @@ const programs = [
     color: "text-indigo-600",
     bgColor: "bg-white",
     hoverColor: "bg-indigo-100",
-    image: "/bank-teller.png"
+    image: "/bank-teller.png",
   },
   {
     id: 7,
@@ -67,7 +67,7 @@ const programs = [
     color: "text-teal-600",
     bgColor: "bg-white",
     hoverColor: "bg-teal-100",
-    image: "/monitor.png"
+    image: "/monitor.png",
   },
   {
     id: 8,
@@ -75,7 +75,7 @@ const programs = [
     color: "text-amber-600",
     bgColor: "bg-white",
     hoverColor: "bg-amber-100",
-    image: "/supply-chain-management.png"
+    image: "/supply-chain-management.png",
   },
 ];
 
@@ -158,7 +158,7 @@ export default function ProgramSection() {
         {/* Call to Action */}
         <div className="text-center mt-16">
           <button className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-            View All Programs
+            Apply Now
           </button>
         </div>
       </div>
