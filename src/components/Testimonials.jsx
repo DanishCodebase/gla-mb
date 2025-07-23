@@ -63,7 +63,7 @@ const features = [
   },
 ]
 
-export default function WhyGLATestimonial() {
+export default function Testimonial() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [api, setApi] = useState()
 
