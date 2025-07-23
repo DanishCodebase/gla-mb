@@ -1,35 +1,49 @@
-import { Building2, Users, Bot, BookOpen, Truck, MessageSquare, Briefcase, Globe } from "lucide-react"
+import {
+  Building2,
+  Users,
+  Bot,
+  BookOpen,
+  Truck,
+  MessageSquare,
+  Briefcase,
+  Globe,
+} from "lucide-react";
 
 export default function WhyGLA() {
   const features = [
     {
       icon: Building2,
       title: "Industry Visits for Real-World Exposure",
-      description: "Experience hands-on learning through visits to top industry workplaces.",
+      description:
+        "Experience hands-on learning through visits to top industry workplaces.",
       iconColor: "text-orange-500",
     },
     {
       icon: Users,
       title: "Dedicated Academic Advisors",
-      description: "Dedicated experts and advisor to guide you at every step of your professional career",
+      description:
+        "Dedicated experts and advisor to guide you at every step of your professional career",
       iconColor: "text-blue-500",
     },
     {
       icon: Bot,
       title: "AI-Professor AMI",
-      description: "Powered by Chat-GPT 4 and open AI-driven technology for online learning",
+      description:
+        "Powered by Chat-GPT 4 and open AI-driven technology for online learning",
       iconColor: "text-green-500",
     },
     {
       icon: BookOpen,
       title: "Diverse learning mediums",
-      description: "E-books, printed & audio books, videos to cater your preferences & unique learning",
+      description:
+        "E-books, printed & audio books, videos to cater your preferences & unique learning",
       iconColor: "text-yellow-500",
     },
     {
       icon: Truck,
       title: "Doorstep delivery of books",
-      description: "India's only online university to provide physical books to read at your door step",
+      description:
+        "India's only online university to provide physical books to read at your door step",
       iconColor: "text-red-500",
     },
     {
@@ -41,36 +55,51 @@ export default function WhyGLA() {
     {
       icon: Briefcase,
       title: "Placement opportunities",
-      description: "Job interview prep, placement assistance & resume building for students to be job-ready",
+      description:
+        "Job interview prep, placement assistance & resume building for students to be job-ready",
       iconColor: "text-cyan-500",
     },
     {
       icon: Globe,
       title: "Metaverse Campus",
-      description: "Discovering endless possibilities of Amity campus through our metaverse tour",
+      description:
+        "Discovering endless possibilities of Amity campus through our metaverse tour",
       iconColor: "text-emerald-500",
     },
-  ]
+  ];
 
   return (
-    <section className="bg-gray-900 py-16 px-4 md:px-6 lg:px-8">
+    <section
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.85)",
+        backgroundImage: "url('/why.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+      }}
+      className="py-16 px-4 md:px-6 lg:px-8"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-12 gap-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-white lg:max-w-md">Why Choose Amity online?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white lg:max-w-md">
+            Why Choose GLA Online?
+          </h2>
           <p className="text-gray-300 text-lg lg:max-w-md lg:text-right">
-            Our distinct online methods empower students to learn through innovative approaches.
+            Our distinct online methods empower students to learn through
+            innovative approaches.
           </p>
         </div>
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => {
-            const IconComponent = feature.icon
+            const IconComponent = feature.icon;
             return (
               <div
                 key={index}
-                className="bg-gray-800 rounded-2xl p-6 border border-gray-700 hover:border-gray-600 transition-colors"
+                className="bg-[#fff3] rounded-2xl p-6 transition-colors"
               >
                 {/* Icon */}
                 <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6">
@@ -78,13 +107,17 @@ export default function WhyGLA() {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-white text-xl font-semibold mb-4 leading-tight">{feature.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{feature.description}</p>
+                <h3 className="text-white text-xl font-semibold mb-4 leading-tight">
+                  {feature.title}
+                </h3>
+                <p className="text-white text-sm leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -53,18 +53,27 @@ const features = [
 
 export function WhyChooseGLA() {
   return (
-    <section className="py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-800/50"></div>
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-900/20 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-purple-900/20 rounded-full blur-3xl"></div>
+    <section 
+      className="py-24 relative overflow-hidden z-0"
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.95)",
+        backgroundImage: "url('/why.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+      }}
+    >
+      {/* Strong Black Overlay */}
+      <div className="absolute z-10 inset-0 bg-black/80"></div>
+      <div className="absolute z-10 inset-0 bg-gradient-to-br from-black/90 via-black/85 to-black/90"></div>
+      <div className="absolute z-10 inset-0 bg-gradient-to-t from-black/70 via-black/50 to-black/60"></div>
       
-      {/* Subtle Background Image Effect */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-2xl"></div>
-      </div>
+      {/* Additional Background Elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-900/40 rounded-full blur-3xl z-10"></div>
+      <div className="absolute bottom-0 left-0 w-72 h-72 bg-purple-900/40 rounded-full blur-3xl z-10"></div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-20">
         {/* Header Section */}
         <div className="mb-20">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
@@ -75,7 +84,7 @@ export function WhyChooseGLA() {
                   GLA Online?
                 </span>
               </h2>
-              <p className="text-xl text-slate-300 leading-relaxed max-w-2xl">
+              <p className="text-xl text-slate-200 leading-relaxed max-w-2xl">
                 Our distinct online methods empower students to learn through innovative approaches 
                 and cutting-edge technology.
               </p>
@@ -93,7 +102,7 @@ export function WhyChooseGLA() {
           {features.map((feature, index) => (
             <Card 
               key={index} 
-              className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl overflow-hidden"
+              className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white/95 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl overflow-hidden"
             >
               <CardContent className="p-6 text-center">
                 {/* Enhanced Icon */}
@@ -102,12 +111,12 @@ export function WhyChooseGLA() {
                 </div>
                 
                 {/* Title */}
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                <h3 className="text-lg font-bold text-slate-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors duration-300">
                   {feature.title}
                 </h3>
                 
                 {/* Description */}
-                <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                <p className="text-slate-600 text-sm leading-relaxed">
                   {feature.description}
                 </p>
                 
