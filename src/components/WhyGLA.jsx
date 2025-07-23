@@ -12,42 +12,42 @@
 export default function WhyGLA() {
   const features = [
     {
-      title: `Degree from a  <span className="!text-orange-500">NAAC A+</span> Accredited University`,
+      title: `Degree from a  <span class="text-green-600 font-bold">NAAC A+</span> Accredited University`,
       description:
         "Earn a prestigious degree from a NAAC A+ accredited institution, ensuring your qualification is recognized and respected worldwide.",
       iconColor: "text-orange-500",
       image: "accreditated.png",
     },
     {
-      title: "Highly Experienced Pool of Faculty Members",
+      title: "<span class='text-green-600 font-bold'>Highly Experienced</span> Pool of Faculty Members",
       description:
         "Learn from industry experts and experienced academics who bring real-world insights and cutting-edge knowledge to your education.",
       iconColor: "text-blue-500",
       image: "teacher.png",
     },
     {
-      title: "Join a Global Network of 36,000+ Alumni",
+      title: "Join a Global Network of <span class='text-green-600 font-bold'>36,000+</span> Alumni",
       description:
         "Connect with a vast network of successful professionals and build valuable relationships that last throughout your career.",
       iconColor: "text-green-500",
       image: "networking.png",
     },
     {
-      title: "Peer Learning through Group Projects & Presentations",
+      title: "<span class='text-green-600 font-bold'>Peer Learning</span> through Group Projects & Presentations",
       description:
         "Collaborate with peers on real-world projects, developing teamwork skills and gaining diverse perspectives.",
       iconColor: "text-yellow-500",
       image: "peer-learning.png",
     },
     {
-      title: "Live & Recorded Lectures",
+      title: "<span class='text-green-600 font-bold'>Live & Recorded</span> Lectures",
       description:
         "Access both live interactive sessions and recorded content, giving you flexibility to learn at your own pace.",
       iconColor: "text-red-500",
       image: "live.png",
     },
     {
-      title: "Placements Powered by GLA University",
+      title: "<span class='text-green-600 font-bold'>Placements</span> Powered by <span class='text-green-600 font-bold'>GLA University</span>",
       description:
         "Access to a wide range of placement opportunities, including internships, job opportunities, and career guidance.",
       iconColor: "text-purple-500",
