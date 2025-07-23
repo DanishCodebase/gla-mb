@@ -12,7 +12,7 @@
 export default function WhyGLA() {
   const features = [
     {
-      title: "Degree from a NAAC A+ Accredited University",
+      title: `Degree from a  <span className="!text-orange-500">NAAC A+</span> Accredited University`,
       description:
         "Earn a prestigious degree from a NAAC A+ accredited institution, ensuring your qualification is recognized and respected worldwide.",
       iconColor: "text-orange-500",
@@ -113,9 +113,11 @@ export default function WhyGLA() {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-white text-xl font-semibold mb-4 leading-tight">
-                  {feature.title}
-                </h3>
+                <h3
+                  className="text-white text-xl font-semibold mb-4 leading-tight"
+                  dangerouslySetInnerHTML={{ __html: feature.title }}
+                />
+  
                 {/* <p className="text-white text-sm leading-relaxed">
                   {feature.description}
                 </p> */}
