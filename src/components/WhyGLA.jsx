@@ -81,7 +81,7 @@ export default function WhyGLA() {
       }}
       className="py-16 px-4 md:px-6 lg:px-8 relative"
     >
-      <div className="absolute inset-0 bg-black/80"></div>
+      <div className="absolute inset-0 bg-black/90"></div>
       <div className="max-w-7xl mx-auto relative z-10 sm:px-4">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-12 gap-8">
