@@ -102,7 +102,7 @@ export default function ProgramSection() {
         <rect
           width="100%"
           height="100%"
-          stroke-width="0"
+          strokeWidth="0"
           fill="url(#:ru:)"
         ></rect>
       </svg>

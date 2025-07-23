@@ -82,33 +82,35 @@ export function Recruiters() {
           {/* First Marquee - Forward Direction */}
           <Marquee className="mb-8" pauseOnHover={true}>
             {recruitersLogos.slice(0, 5).map((logo, index) => (
-            //   <div
-            //     key={`forward-${index}`}
-            //     className="flex flex-col items-center justify-center mx-2 w-full bg-white shadow-sm hover:shadow-md transition-all duration-300 h-20"
-            //   >
-                <img
-                  src={logo.image}
-                  alt={logo.alt}
-                  className="object-contain w-full h-full"
-                  loading="lazy"
-                />
-            //   </div>
+              //   <div
+              //     key={`forward-${index}`}
+              //     className="flex flex-col items-center justify-center mx-2 w-full bg-white shadow-sm hover:shadow-md transition-all duration-300 h-20"
+              //   >
+              <img
+                key={`${index}-forward`}
+                src={logo.image}
+                alt={logo.alt}
+                className="object-contain w-full h-full"
+                loading="lazy"
+              />
+              //   </div>
             ))}
           </Marquee>
           {/* Second Marquee - Backwar Direction */}
           <Marquee className="mb-8" pauseOnHover={true} reverse>
             {recruitersLogos.slice(5, 10).map((logo, index) => (
-            //   <div
-            //     key={`forward-${index}`}
-            //     className="flex flex-col items-center justify-center mx-2 w-full bg-white shadow-sm hover:shadow-md transition-all duration-300 h-20"
-            //   >
-                <img
-                  src={logo.image}
-                  alt={logo.alt}
-                  className="object-contain w-full h-full"
-                  loading="lazy"
-                />
-            //   </div>
+              //   <div
+              //     key={`forward-${index}`}
+              //     className="flex flex-col items-center justify-center mx-2 w-full bg-white shadow-sm hover:shadow-md transition-all duration-300 h-20"
+              //   >
+              <img
+                key={`${index}-backward`}
+                src={logo.image}
+                alt={logo.alt}
+                className="object-contain w-full h-full"
+                loading="lazy"
+              />
+              //   </div>
             ))}
           </Marquee>
         </div>
