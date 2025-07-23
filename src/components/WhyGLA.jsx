@@ -1,71 +1,72 @@
-import {
-  Building2,
-  Users,
-  Bot,
-  BookOpen,
-  Truck,
-  MessageSquare,
-  Briefcase,
-  Globe,
-} from "lucide-react";
+// import {
+//   Building2,
+//   Users,
+//   Bot,
+//   BookOpen,
+//   Truck,
+//   MessageSquare,
+//   Briefcase,
+//   Globe,
+// } from "lucide-react";
 
 export default function WhyGLA() {
   const features = [
     {
-      icon: Building2,
-      title: "Industry Visits for Real-World Exposure",
+      title: "Degree from a NAAC A+ Accredited University",
       description:
-        "Experience hands-on learning through visits to top industry workplaces.",
+        "Earn a prestigious degree from a NAAC A+ accredited institution, ensuring your qualification is recognized and respected worldwide.",
       iconColor: "text-orange-500",
+      image: "accreditated.png",
     },
     {
-      icon: Users,
-      title: "Dedicated Academic Advisors",
+      title: "Highly Experienced Pool of Faculty Members",
       description:
-        "Dedicated experts and advisor to guide you at every step of your professional career",
+        "Learn from industry experts and experienced academics who bring real-world insights and cutting-edge knowledge to your education.",
       iconColor: "text-blue-500",
+      image: "teacher.png",
     },
     {
-      icon: Bot,
-      title: "AI-Professor AMI",
+      title: "Join a Global Network of 36,000+ Alumni",
       description:
-        "Powered by Chat-GPT 4 and open AI-driven technology for online learning",
+        "Connect with a vast network of successful professionals and build valuable relationships that last throughout your career.",
       iconColor: "text-green-500",
+      image: "networking.png",
     },
     {
-      icon: BookOpen,
-      title: "Diverse learning mediums",
+      title: "Peer Learning through Group Projects & Presentations",
       description:
-        "E-books, printed & audio books, videos to cater your preferences & unique learning",
+        "Collaborate with peers on real-world projects, developing teamwork skills and gaining diverse perspectives.",
       iconColor: "text-yellow-500",
+      image: "peer-learning.png",
     },
     {
-      icon: Truck,
-      title: "Doorstep delivery of books",
+      title: "Live & Recorded Lectures",
       description:
-        "India's only online university to provide physical books to read at your door step",
+        "Access both live interactive sessions and recorded content, giving you flexibility to learn at your own pace.",
       iconColor: "text-red-500",
+      image: "live.png",
     },
     {
-      icon: MessageSquare,
-      title: "beSocial - Student Community Platform",
-      description: "Where 75,000+ students connect, engage, and grow.",
+      title: "Placements Powered by GLA University",
+      description:
+        "Access to a wide range of placement opportunities, including internships, job opportunities, and career guidance.",
       iconColor: "text-purple-500",
+      image: "hiring.png",
     },
-    {
-      icon: Briefcase,
-      title: "Placement opportunities",
-      description:
-        "Job interview prep, placement assistance & resume building for students to be job-ready",
-      iconColor: "text-cyan-500",
-    },
-    {
-      icon: Globe,
-      title: "Metaverse Campus",
-      description:
-        "Discovering endless possibilities of Amity campus through our metaverse tour",
-      iconColor: "text-emerald-500",
-    },
+    // {
+    //   icon: Briefcase,
+    //   title: "Placement opportunities",
+    //   description:
+    //     "Job interview prep, placement assistance & resume building for students to be job-ready",
+    //   iconColor: "text-cyan-500",
+    // },
+    // {
+    //   icon: Globe,
+    //   title: "Metaverse Campus",
+    //   description:
+    //     "Discovering endless possibilities of Amity campus through our metaverse tour",
+    //   iconColor: "text-emerald-500",
+    // },
   ];
 
   return (
@@ -81,7 +82,7 @@ export default function WhyGLA() {
       className="py-16 px-4 md:px-6 lg:px-8 relative"
     >
       <div className="absolute inset-0 bg-black/80"></div>
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10 sm:px-4">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-12 gap-8">
           <h2 className="text-4xl md:text-5xl font-bold text-white lg:max-w-md">
@@ -94,7 +95,7 @@ export default function WhyGLA() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
@@ -103,17 +104,21 @@ export default function WhyGLA() {
                 className="bg-[#fff3] rounded-2xl p-6 transition-colors"
               >
                 {/* Icon */}
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6">
-                  <IconComponent className={`w-8 h-8 ${feature.iconColor}`} />
+                <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6">
+                  <img
+                    src={`/${feature.image}`}
+                    alt={feature.title}
+                    className="w-16 h-16"
+                  />
                 </div>
 
                 {/* Content */}
                 <h3 className="text-white text-xl font-semibold mb-4 leading-tight">
                   {feature.title}
                 </h3>
-                <p className="text-white text-sm leading-relaxed">
+                {/* <p className="text-white text-sm leading-relaxed">
                   {feature.description}
-                </p>
+                </p> */}
               </div>
             );
           })}
