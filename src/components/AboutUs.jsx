@@ -33,17 +33,17 @@ const AboutUs = () => {
   };
 
   return (
-    <section className="py-20 relative xl:mr-0 lg:mr-5 mr-0">
+    <section className="py-16 sm:py-20 relative xl:mr-0 lg:mr-5 mr-0">
       <div className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
         <div className="w-full justify-start items-center xl:gap-12 gap-10 grid lg:grid-cols-2 grid-cols-1">
           <div className="w-full flex-col justify-center lg:items-start items-center gap-10 inline-flex">
             <div className="w-full flex-col justify-center items-start gap-8 flex">
               <div className="flex-col justify-start lg:items-start items-center gap-4 flex">
                 <div className="w-full flex-col justify-start lg:items-start gap-3 flex">
-                  <h2 className="text-indigo-700 sm:text-5xl text-4xl font-bold font-manrope text-start ">
+                  <h2 className="text-indigo-700 text-3xl sm:text-4xl lg:text-5xl font-bold font-manrope sm:text-start text-center">
                     About GLA Online
                   </h2>
-                  <p className="text-gray-500 text-[17px] font-normal leading-relaxed lg:text-start ">
+                  <p className="text-gray-500 text-[17px] font-normal leading-relaxed sm:text-start text-center">
                     Start your career with GLA University's Online MBA — a
                     UGC-entitled, NAAC A+ accredited program designed for
                     working professionals. Gain industry-relevant skills, learn

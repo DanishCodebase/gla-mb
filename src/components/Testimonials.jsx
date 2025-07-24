@@ -73,6 +73,20 @@ const features = [
 export default function Testimonial() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [api, setApi] = useState();
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  // Auto-slide functionality
+  useEffect(() => {
+    if (!api || !isAutoPlaying) return;
+
+    const interval = setInterval(() => {
+      const currentIndex = api.selectedScrollSnap();
+      const nextIndex = (currentIndex + 1) % features.length;
+      api.scrollTo(nextIndex);
+    }, 3000); // Change slide every 3 second
+
+    return () => clearInterval(interval);
+  }, [api, isAutoPlaying]);
 
   useEffect(() => {
     if (!api) return;
@@ -87,8 +101,16 @@ export default function Testimonial() {
     api?.scrollTo(index);
   };
 
+  const handleMouseEnter = () => {
+    setIsAutoPlaying(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsAutoPlaying(true);
+  };
+
   return (
-    <section className="py-12 sm:py-16 lg:py-20 px-4 bg-black min-h-screen">
+    <section className="py-16 sm:py-20 px-4 bg-black min-h-screen">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 lg:mb-16">
@@ -139,7 +161,11 @@ export default function Testimonial() {
         </div>
 
         {/* Carousel */}
-        <div className="relative">
+        <div
+          className="relative"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <Carousel
             setApi={setApi}
             className="w-full"
@@ -155,7 +181,7 @@ export default function Testimonial() {
                     <CardContent className="">
                       <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
                         {/* Large Profile Image */}
-                        <div className="relative w-full sm:w-80 h-80 sm:h-80 lg:w-80 lg:h-80 rounded-xl overflow-hidden flex-shrink-0 mx-auto lg:mx-0">
+                        <div className="relative w-72 sm:w-80 h-72 sm:h-80 lg:w-80 lg:h-80 rounded-xl overflow-hidden flex-shrink-0 mx-auto lg:mx-0">
                           <Image
                             src={feature.image || "/placeholder.svg"}
                             alt={feature.name}

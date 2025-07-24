@@ -134,7 +134,7 @@ export default function JourneyAtGLA() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen py-20 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100"
+      className="relative min-h-screen py-16 sm:py-20 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100"
     >
       {/* Advanced Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
@@ -218,7 +218,7 @@ export default function JourneyAtGLA() {
 
             {/* Main Heading with Advanced Animation */}
             <div className="relative mb-6">
-              <h2 className="text-4xl sm:text-5xl font-bold text-slate-800 leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-800 leading-tight">
                 <span className="inline-block animate-slide-up" style={{ animationDelay: "0.2s" }}>
                   Your Journey
                 </span>{" "}
@@ -528,7 +528,7 @@ export default function JourneyAtGLA() {
             {/* Enhanced Buttons */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
               {/* Primary Button */}
-              <a href="#contact-form" onClick={handleApplyNowClick} className="group relative inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 overflow-hidden">
+              <a href="#contact-form" onClick={handleApplyNowClick} className="group relative inline-flex justify-center items-center gap-3 px-10 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                 <span className="relative z-10">Start Application</span>
                 <ArrowRight className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />

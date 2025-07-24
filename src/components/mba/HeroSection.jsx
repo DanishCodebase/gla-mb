@@ -236,7 +236,7 @@ export function HeroSection() {
       <div className="container max-w-7xl mx-auto px-4 py-16 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Content */}
-          <div className="space-y-8">
+          <div className="space-y-4 sm:space-y-8">
             {/* Badge */}
             <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full text-sm font-semibold shadow-lg">
               <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>

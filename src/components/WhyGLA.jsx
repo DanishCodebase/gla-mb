@@ -79,13 +79,13 @@ export default function WhyGLA() {
         backgroundRepeat: "no-repeat",
         backgroundAttachment: "fixed",
       }}
-      className="py-16 px-4 md:px-6 lg:px-8 relative"
+      className="py-16 sm:py-20 px-4 md:px-6 lg:px-8 relative"
     >
       <div className="absolute inset-0 bg-black/90"></div>
       <div className="max-w-7xl mx-auto relative z-10 sm:px-4">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-12 gap-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-white lg:max-w-md">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white lg:max-w-md">
             Why Choose GLA Online?
           </h2>
           <p className="text-gray-300 text-lg lg:max-w-md lg:text-right">

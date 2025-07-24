@@ -83,7 +83,7 @@ export default function ProgramSection() {
     }
   };
   return (
-    <section className="w-full py-16 md:py-20 bg-gradient-to-b from-white to-gray-50 relative">
+    <section className="w-full py-16 sm:py-20 bg-gradient-to-b from-white to-gray-50 relative">
       <svg
         aria-hidden="true"
         className="pointer-events-none absolute z-0 inset-0 h-full w-full fill-neutral-400/80 [mask-image:radial-gradient(200px_circle_at_center,white,transparent, top-0 left-0 right-50 bottom-50,)]"
@@ -111,7 +111,7 @@ export default function ProgramSection() {
       <div className="container max-w-7xl mx-auto relative z-10 px-4 md:px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4">
             Our Specialisations
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
