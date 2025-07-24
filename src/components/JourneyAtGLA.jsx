@@ -174,8 +174,8 @@ export default function JourneyAtGLA() {
             className="w-full h-full animate-grid-shift"
             style={{
               backgroundImage: `
-                linear-gradient(rgba(30, 41, 59, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(30, 41, 59, 0.1) 1px, transparent 1px)
+                linear-gradient(rgba(30, 41, 59, 0.1) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(30, 41, 59, 0.1) 2px, transparent 2px)
               `,
               backgroundSize: "40px 40px",
             }}
@@ -208,18 +208,18 @@ export default function JourneyAtGLA() {
 
             {/* Main Heading with Advanced Animation */}
             <div className="relative mb-6">
-              <h2 className="text-5xl md:text-7xl font-bold text-slate-800 leading-tight">
+              <h2 className="text-4xl sm:text-5xl font-bold text-slate-800 leading-tight">
                 <span className="inline-block animate-slide-up" style={{ animationDelay: "0.2s" }}>
-                  How
+                  Your Journey
                 </span>{" "}
                 <span className="inline-block animate-slide-up" style={{ animationDelay: "0.4s" }}>
-                  it
+                  at
                 </span>{" "}
                 <span
                   className="inline-block animate-slide-up bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 bg-clip-text text-transparent"
                   style={{ animationDelay: "0.6s" }}
                 >
-                  works
+                  GLA Online
                 </span>
               </h2>
 
@@ -229,7 +229,7 @@ export default function JourneyAtGLA() {
 
             {/* Subtitle with Staggered Animation */}
             <p
-              className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed animate-fade-up"
+              className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed animate-fade-up"
               style={{ animationDelay: "0.8s" }}
             >
               Follow these simple steps to complete your MBA educational journey with excellence

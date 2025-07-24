@@ -13,12 +13,12 @@ export default function Home() {
     <main>
       <HeroSection />
       <AboutUs />
-      <RankingsAccreditations />
       <ProgramSection />
-      <WhyGLA />
       <Recruiters />
-      <Testimonials />
+      <WhyGLA />
+      <RankingsAccreditations />
       <JourneyAtGLA />
+      <Testimonials />
       {/* <OrbitingCircle /> */}
     </main>
   );

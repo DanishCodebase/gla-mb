@@ -110,11 +110,10 @@ export default function ProgramSection() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4">
-            Our Programs
+            Our Specialisations
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Discover our comprehensive range of programs designed to help you
-            achieve your academic and career goals
+            Our 8 specialisations covers all management aspects
           </p>
         </div>
 
