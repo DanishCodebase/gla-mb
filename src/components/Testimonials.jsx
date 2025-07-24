@@ -58,16 +58,16 @@ const features = [
     testimonial:
       "Studying MBA online from GLA University has been an enriching experience! The course is designed to fit my busy schedule, and the faculty is always available to guide and support me. The practical insights, coupled with academic excellence, have not only enhanced my business acumen but also broadened my perspective. I feel well-prepared for the corporate world, and the interactive learning environment has made every session insightful. GLA Online has truly exceeded my expectations!",
   },
-  {
-    id: 6,
-    name: "James Wilson",
-    title: "Career Services Director",
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
-    headline: "Placements Powered by GLA University",
-    testimonial:
-      "Our dedicated placement cell works tirelessly to connect students with top employers. With GLA University's strong industry partnerships and proven track record, we ensure that our graduates have access to excellent career opportunities and professional growth prospects.",
-  },
+  // {
+  //   id: 6,
+  //   name: "James Wilson",
+  //   title: "Career Services Director",
+  //   image:
+  //     "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+  //   headline: "Placements Powered by GLA University",
+  //   testimonial:
+  //     "Our dedicated placement cell works tirelessly to connect students with top employers. With GLA University's strong industry partnerships and proven track record, we ensure that our graduates have access to excellent career opportunities and professional growth prospects.",
+  // },
 ];
 
 export default function Testimonial() {
