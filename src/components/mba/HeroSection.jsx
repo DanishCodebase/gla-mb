@@ -5,34 +5,228 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { getAllStates, getCitiesForState } from "@/lib/stateData";
+import { submitAdmissionQuery } from "@/lib/crm"; 
 
 export function HeroSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    mobile: "",
+    phone: "",
+    coursesid: "OGLAMBA201",
     state: "",
     city: "",
+    page: "glaOnlineMBA",
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [cities, setCities] = useState([]);
+
+  const formFields = [
+    {
+      name: "name",
+      label: "Full Name",
+      type: "text",
+      placeholder: "Enter your full name",
+      required: true,
+      validation: (value) => value.trim().length >= 2,
+      errorMessage: "Name must be at least 2 characters long",
+    },
+    {
+      name: "email",
+      label: "Email Address",
+      type: "email",
+      placeholder: "your.email@example.com",
+      required: true,
+      validation: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+      errorMessage: "Please enter a valid email address",
+    },
+    {
+      name: "phone",
+      label: "Mobile Number",
+      type: "tel",
+      placeholder: "+91 98765 43210",
+      required: true,
+      validation: (value) => /^[6-9][0-9]{9}$/.test(value),
+      errorMessage:
+        "Please enter a valid 10-digit phone number starting with 6, 7, 8, or 9",
+    },
+  ];
+
+  const handleChange = (name, value) => {
+    let processedValue = value;
+
+    if (name === "name") {
+      processedValue = value.replace(/[^a-zA-Z\s]/g, "");
+    } else if (name === "phone") {
+      processedValue = value.replace(/[^0-9]/g, "");
+      if (processedValue.length > 10) {
+        processedValue = processedValue.slice(0, 10);
+      }
+    }
+
+    setFormData((prev) => ({ ...prev, [name]: processedValue }));
+    setErrors((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: validateField(name, processedValue),
     }));
+
+    if (name === "state") {
+      // Reset city when state changes
+      setFormData((prev) => ({ ...prev, city: "" }));
+      // Get cities for selected state
+      const stateCities = getCitiesForState(processedValue);
+      setCities(stateCities);
+    }
   };
 
-  const handleSubmit = (e) => {
+  const validateField = (name, value) => {
+    const field = formFields.find((f) => f.name === name);
+    if (!field) return "";
+    if (field.required && !value) return `${field.label} is required`;
+    if (value && field.validation && !field.validation(value)) {
+      return field.errorMessage;
+    }
+    return "";
+  };
+
+  const handlePhoneBlur = () => {
+    const phone = formData.phone;
+    if (/^[6-9][0-9]{9}$/.test(phone)) {
+      let submittedPhoneNumbers =
+        JSON.parse(localStorage.getItem("submittedPhoneNumbers")) || [];
+      if (submittedPhoneNumbers.includes(phone)) {
+        toast.warning(
+          "Note: This phone number may have already been used in this session."
+        );
+      }
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Form submitted:", formData);
+
+    // Validate all fields
+    const newErrors = {};
+    formFields.forEach((field) => {
+      const error = validateField(field.name, formData[field.name]);
+      if (error) newErrors[field.name] = error;
+    });
+
+    // Validate state and city
+    if (!formData.state) {
+      newErrors.state = "Please select a state";
+    }
+    if (!formData.city) {
+      newErrors.city = "Please select a city";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      toast.error("Please fill in all required fields correctly.");
+      return;
+    }
+
+    // Frontend check for duplicate phone number using localStorage
+    let submittedPhoneNumbers =
+      JSON.parse(localStorage.getItem("submittedPhoneNumbers")) || [];
+    if (submittedPhoneNumbers.includes(formData.phone)) {
+      toast.warning(
+        "This phone number has already been used to submit a query during this session."
+      );
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const sanitizedFormData = {
+        ...formData,
+        city: formData.city.replace(/\s/g, ""),
+        page: "glaOnlineMBA",
+      };
+
+      // PARALLEL API CALLS for faster submission
+      const [crmResult, sheetsResponse] = await Promise.all([
+        submitAdmissionQuery(sanitizedFormData, {}),
+        fetch("/api/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...sanitizedFormData,
+            campaign: "",
+            utm_source: "Stealth",
+            utm_medium: "",
+            utm_term: "",
+            utm_content: "",
+          }),
+        }),
+      ]);
+
+      const sheetsData = await sheetsResponse.json();
+
+      // Handle success case
+      if (crmResult.success || sheetsData.success) {
+        toast.success("Form submitted successfully!");
+        if (!submittedPhoneNumbers.includes(formData.phone)) {
+          submittedPhoneNumbers.push(formData.phone);
+          localStorage.setItem(
+            "submittedPhoneNumbers",
+            JSON.stringify(submittedPhoneNumbers)
+          );
+        }
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          coursesid: "OGLAMBA201",
+          state: "",
+          city: "",
+          page: "glaOnlineMBA",
+        });
+        setErrors({});
+        window.location.href = "/thankyou.html";
+      } else {
+        // Handle error case
+        if (sheetsData.isDuplicate) {
+          toast.error(
+            "This phone number has already been used to submit an inquiry."
+          );
+          if (!submittedPhoneNumbers.includes(formData.phone)) {
+            submittedPhoneNumbers.push(formData.phone);
+            localStorage.setItem(
+              "submittedPhoneNumbers",
+              JSON.stringify(submittedPhoneNumbers)
+            );
+          }
+        } else {
+          toast.error("Failed to submit form. Please try again.");
+        }
+      }
+    } catch (error) {
+      toast.error("An unexpected error occurred. Please try again.");
+      console.error("Form submission error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <section
       style={{
-        backgroundImage: "url('/herobg.webp')",
+        backgroundImage: "url('/herobg1.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -66,9 +260,9 @@ export function HeroSection() {
             </p> */}
 
             {/* Key Benefits */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+            <div className="grid grid-cols-3 gap-6 pt-6">
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                <div className="min-w-8 min-h-8 bg-green-100 rounded-full flex items-center justify-center">
                   <svg
                     className="w-4 h-4 text-green-600"
                     fill="none"
@@ -88,7 +282,7 @@ export function HeroSection() {
                 </span>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                <div className="min-w-8 min-h-8 bg-blue-100 rounded-full flex items-center justify-center">
                   <svg
                     className="w-4 h-4 text-blue-600"
                     fill="none"
@@ -108,7 +302,7 @@ export function HeroSection() {
                 </span>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                <div className="min-w-8 min-h-8 bg-purple-100 rounded-full flex items-center justify-center">
                   <svg
                     className="w-4 h-4 text-purple-600"
                     fill="none"
@@ -149,7 +343,7 @@ export function HeroSection() {
           <div className="lg:pl-8">
             <Card
               id="contact-form"
-              className="bg-white/95 backdrop-blur-xl border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 max-w-sm ms-auto"
+              className="bg-white/95 backdrop-blur-xl border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 max-w-sm mx-auto lg:ms-auto lg:mr-0"
             >
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl font-bold text-slate-900">
@@ -175,11 +369,16 @@ export function HeroSection() {
                       name="name"
                       type="text"
                       placeholder="Enter your full name"
-                      className="h-12 text-base border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
+                      className={`h-12 text-base border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 ${
+                        errors.name ? "border-red-500" : ""
+                      }`}
                       value={formData.name}
-                      onChange={handleInputChange}
+                      onChange={(e) => handleChange("name", e.target.value)}
                       required
                     />
+                    {errors.name && (
+                      <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                    )}
                   </div>
 
                   {/* Email Field */}
@@ -195,31 +394,42 @@ export function HeroSection() {
                       name="email"
                       type="email"
                       placeholder="Enter your email address"
-                      className="h-12 text-base border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
+                      className={`h-12 text-base border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 ${
+                        errors.email ? "border-red-500" : ""
+                      }`}
                       value={formData.email}
-                      onChange={handleInputChange}
+                      onChange={(e) => handleChange("email", e.target.value)}
                       required
                     />
+                    {errors.email && (
+                      <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                    )}
                   </div>
 
-                  {/* Mobile Field */}
+                  {/* Phone Field */}
                   <div className="space-y-2">
                     <Label
-                      htmlFor="mobile"
+                      htmlFor="phone"
                       className="text-sm font-semibold text-slate-700"
                     >
                       Mobile Number *
                     </Label>
                     <Input
-                      id="mobile"
-                      name="mobile"
+                      id="phone"
+                      name="phone"
                       type="tel"
                       placeholder="Enter your mobile number"
-                      className="h-12 text-base border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
-                      value={formData.mobile}
-                      onChange={handleInputChange}
+                      className={`h-12 text-base border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 ${
+                        errors.phone ? "border-red-500" : ""
+                      }`}
+                      value={formData.phone}
+                      onChange={(e) => handleChange("phone", e.target.value)}
+                      onBlur={handlePhoneBlur}
                       required
                     />
+                    {errors.phone && (
+                      <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                    )}
                   </div>
 
                   {/* State and City Fields */}
@@ -231,16 +441,28 @@ export function HeroSection() {
                       >
                         State *
                       </Label>
-                      <Input
-                        id="state"
-                        name="state"
-                        type="text"
-                        placeholder="Your state"
-                        className="h-12 text-base border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
+                      <Select
                         value={formData.state}
-                        onChange={handleInputChange}
-                        required
-                      />
+                        onValueChange={(value) => handleChange("state", value)}
+                      >
+                        <SelectTrigger
+                          className={`h-12 text-base border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 ${
+                            errors.state ? "border-red-500" : ""
+                          }`}
+                        >
+                          <SelectValue placeholder="Select State" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {getAllStates().map((state) => (
+                            <SelectItem key={state} value={state}>
+                              {state}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      {errors.state && (
+                        <p className="text-red-500 text-sm mt-1">{errors.state}</p>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <Label
@@ -249,28 +471,48 @@ export function HeroSection() {
                       >
                         City *
                       </Label>
-                      <Input
-                        id="city"
-                        name="city"
-                        type="text"
-                        placeholder="Your city"
-                        className="h-12 text-base border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
+                      <Select
                         value={formData.city}
-                        onChange={handleInputChange}
-                        required
-                      />
+                        onValueChange={(value) => handleChange("city", value)}
+                        disabled={!formData.state}
+                      >
+                        <SelectTrigger
+                          className={`h-12 text-base border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 ${
+                            errors.city ? "border-red-500" : ""
+                          }`}
+                        >
+                          <SelectValue placeholder="Select City" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {cities.map((city) => (
+                            <SelectItem key={city} value={city}>
+                              {city}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      {errors.city && (
+                        <p className="text-red-500 text-sm mt-1">{errors.city}</p>
+                      )}
                     </div>
                   </div>
 
                   {/* Submit Button */}
                   <Button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-4 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 mt-6"
+                    disabled={isLoading}
+                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-4 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50"
                   >
-                    Get Free Consultation
+                    {isLoading ? (
+                      <div className="flex items-center justify-center">
+                        <div className="rounded-full h-5 w-5 border-b-2 border-white mr-2 animate-spin"></div>
+                        Processing...
+                      </div>
+                    ) : (
+                      "Get Free Consultation"
+                    )}
                   </Button>
 
-                  {/* Privacy Notice */}
                   <p className="text-xs text-slate-500 text-center leading-relaxed">
                     By submitting this form, you agree to our{" "}
                     <a href="#" className="text-blue-600 hover:underline">

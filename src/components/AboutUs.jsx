@@ -69,21 +69,34 @@ const AboutUs = () => {
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M14 5l7 7m0 0l-7 7m7-7H3"
                 />
               </svg>
             </button>
           </div>
           <div className="w-full lg:justify-start justify-center items-start flex">
-            <div className="sm:w-[564px] w-full sm:h-[646px] h-full sm:bg-black/85 rounded-3xl sm:border border-gray-200 relative">
-              <img
-                className="sm:mt-5 sm:ml-5 w-full h-full rounded-3xl object-cover"
-                src="/about.webp"
-                alt="about Us image"
-              />
+            <div className="sm:w-[564px] w-full sm:h-[564px] h-full sm:bg-black/85 rounded-3xl sm:border border-gray-200 relative">
+              <picture>
+                {/* Large devices - use about-lg.webp */}
+                <source
+                  media="(min-width: 1024px)"
+                  srcSet="/about-lg.webp"
+                />
+                {/* Small and medium devices - use about.webp */}
+                <source
+                  media="(max-width: 1023px)"
+                  srcSet="/about.webp"
+                />
+                {/* Fallback image */}
+                <img
+                  className="sm:mt-5 sm:ml-5 w-full h-full rounded-3xl object-cover"
+                  src="/about.webp"
+                  alt="about Us image"
+                />
+              </picture>
             </div>
           </div>
         </div>
