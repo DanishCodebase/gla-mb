@@ -32,7 +32,7 @@ export function HeroSection() {
   return (
     <section
       style={{
-        backgroundImage: "url('/herobg.jpg')",
+        backgroundImage: "url('/herobg.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -50,20 +50,20 @@ export function HeroSection() {
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
               Get Your{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-purple-400">
                 Online MBA
               </span>{" "}
               Degree in 2 Years
             </h1>
 
             {/* Supporting Text */}
-            <p className="text-lg md:text-xl text-white leading-relaxed max-w-2xl">
+            {/* <p className="text-lg md:text-xl text-white leading-relaxed max-w-2xl">
               Transform your career with our accredited online MBA program.
               Flexible learning, industry-relevant curriculum, and expert
               faculty to help you achieve your professional goals.
-            </p>
+            </p> */}
 
             {/* Key Benefits */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">

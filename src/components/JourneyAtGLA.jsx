@@ -124,7 +124,7 @@ export default function JourneyAtGLA() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen py-32 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100"
+      className="relative min-h-screen py-20 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100"
     >
       {/* Advanced Animated Background */}
       <div className="absolute inset-0 overflow-hidden">

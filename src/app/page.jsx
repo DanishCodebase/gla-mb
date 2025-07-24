@@ -6,18 +6,20 @@ import Testimonials from "@/components/Testimonials";
 import { OrbitingCircle } from "@/components/OrbitingCircle";
 import JourneyAtGLA from "@/components/JourneyAtGLA";
 import { HeroSection } from "@/components/mba/HeroSection";
+import AboutUs from "@/components/AboutUs";
 
 export default function Home() {
   return (
     <main>
       <HeroSection />
+      <AboutUs />
       <RankingsAccreditations />
       <ProgramSection />
       <WhyGLA />
       <Recruiters />
       <Testimonials />
       <JourneyAtGLA />
-      <OrbitingCircle />
+      {/* <OrbitingCircle /> */}
     </main>
   );
 }
