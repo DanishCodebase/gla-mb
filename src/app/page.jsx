@@ -5,10 +5,12 @@ import { Recruiters } from "@/components/Recruiters";
 import Testimonials from "@/components/Testimonials";
 import { OrbitingCircle } from "@/components/OrbitingCircle";
 import JourneyAtGLA from "@/components/JourneyAtGLA";
+import { HeroSection } from "@/components/mba/HeroSection";
 
 export default function Home() {
   return (
     <main>
+      <HeroSection />
       <RankingsAccreditations />
       <ProgramSection />
       <WhyGLA />
@@ -19,4 +21,3 @@ export default function Home() {
     </main>
   );
 }
-
