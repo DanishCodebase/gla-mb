@@ -446,13 +446,13 @@ export function HeroSection() {
                         onValueChange={(value) => handleChange("state", value)}
                       >
                         <SelectTrigger
-                          className={`h-12 text-base border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 ${
+                          className={`h-12 text-base border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 w-full ${
                             errors.state ? "border-red-500" : ""
                           }`}
                         >
                           <SelectValue placeholder="Select State" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="w-full">
                           {getAllStates().map((state) => (
                             <SelectItem key={state} value={state}>
                               {state}
@@ -477,13 +477,13 @@ export function HeroSection() {
                         disabled={!formData.state}
                       >
                         <SelectTrigger
-                          className={`h-12 text-base border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 ${
+                          className={`h-12 text-base border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 w-full ${
                             errors.city ? "border-red-500" : ""
                           }`}
                         >
                           <SelectValue placeholder="Select City" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="w-full">
                           {cities.map((city) => (
                             <SelectItem key={city} value={city}>
                               {city}

@@ -7,10 +7,12 @@ import { OrbitingCircle } from "@/components/OrbitingCircle";
 import JourneyAtGLA from "@/components/JourneyAtGLA";
 import { HeroSection } from "@/components/mba/HeroSection";
 import AboutUs from "@/components/AboutUs";
+import Header from "@/components/Header";
 
 export default function Home() {
   return (
     <main>
+      <Header />
       <HeroSection />
       <AboutUs />
       <ProgramSection />
