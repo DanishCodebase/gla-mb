@@ -1,14 +1,6 @@
+"use client";
+
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  GraduationCap,
-  Code,
-  Palette,
-  BarChart3,
-  Stethoscope,
-  Camera,
-  Music,
-  Globe,
-} from "lucide-react";
 import Image from "next/image";
 
 // Program data - easily expandable
@@ -80,6 +72,16 @@ const programs = [
 ];
 
 export default function ProgramSection() {
+  const handleApplyNowClick = (e) => {
+    e.preventDefault();
+    const contactForm = document.getElementById("contact-form");
+    if (contactForm) {
+      contactForm.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
   return (
     <section className="w-full py-16 md:py-20 bg-gradient-to-b from-white to-gray-50 relative">
       <svg
@@ -156,9 +158,13 @@ export default function ProgramSection() {
 
         {/* Call to Action */}
         <div className="text-center mt-16">
-          <button className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+          <a
+            href="#contact-form"
+            onClick={handleApplyNowClick}
+            className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+          >
             Apply Now
-          </button>
+          </a>
         </div>
       </div>
     </section>

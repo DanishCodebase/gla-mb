@@ -26,6 +26,16 @@ export default function JourneyAtGLA() {
   const [particles, setParticles] = useState([])
   const sectionRef = useRef(null)
 
+  const handleApplyNowClick = (e) => {
+    e.preventDefault();
+    const contactForm = document.getElementById("contact-form");
+    if (contactForm) {
+      contactForm.scrollIntoView({ 
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  };
   useEffect(() => {
     setIsVisible(true)
 
@@ -518,18 +528,18 @@ export default function JourneyAtGLA() {
             {/* Enhanced Buttons */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
               {/* Primary Button */}
-              <button className="group relative inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 overflow-hidden">
+              <a href="#contact-form" onClick={handleApplyNowClick} className="group relative inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                 <span className="relative z-10">Start Application</span>
                 <ArrowRight className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
+              </a>
 
               {/* Secondary Button */}
-              <button className="group relative inline-flex items-center gap-3 px-10 py-4 bg-white/80 backdrop-blur-sm text-slate-700 font-semibold rounded-xl border border-slate-300 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 overflow-hidden">
+              {/* <button className="group relative inline-flex items-center gap-3 px-10 py-4 bg-white/80 backdrop-blur-sm text-slate-700 font-semibold rounded-xl border border-slate-300 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 overflow-hidden">
                 <div className="absolute inset-0 bg-slate-50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                 <span className="relative z-10">Learn More</span>
                 <ChevronRight className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
+              </button> */}
             </div>
 
             {/* Trust Indicators */}
@@ -668,5 +678,5 @@ export default function JourneyAtGLA() {
         .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
       `}</style>
     </section>
-  )
+  );
 }
