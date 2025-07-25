@@ -3,24 +3,23 @@
 const AboutUs = () => {
   const features = [
     {
-      title: "Flexible Schedule",
-      description: "Weekend and evening classes to fit your work schedule",
+      title: "Flexible Learning Schedule",
+      description: "Learn at your own pace with convenient weekend and evening classes designed for working professionals",
       bgColor: "bg-blue-100",
     },
     {
-      title: "Comprehensive Curriculum",
-      description: "Our 8 specialisations covers all management aspects",
+      title: "Industry-Aligned Curriculum", 
+      description: "Master 8 in-demand specializations covering strategic, operational and functional aspects of management",
       bgColor: "bg-green-100",
     },
     {
-      title: "Industry Focus",
-      description:
-        "Real-world projects and case studies from leading companies",
-      bgColor: "bg-yellow-100",
+      title: "Industry-Integrated Learning",
+      description: "Gain hands-on experience through live projects, case studies and mentoring from industry leaders",
+      bgColor: "bg-yellow-100", 
     },
     {
-      title: "Professional Development",
-      description: "Enhanced attitude and professional integrity development",
+      title: "Holistic Professional Growth",
+      description: "Develop leadership skills, business acumen and professional ethics for career advancement",
       bgColor: "bg-red-100",
     },
   ];
@@ -47,7 +46,7 @@ const AboutUs = () => {
                   <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold font-manrope sm:text-start text-center">
                     About Our Online MBA Program
                   </h2>
-                  <p className="text-gray-500 text-[17px] font-normal leading-relaxed sm:text-start text-center">
+                  <p className="text-gray-500 sm:text-[17px] font-normal leading-relaxed sm:text-start text-justify">
                     Start your career with GLA University's Online MBA — a
                     UGC-entitled, NAAC A+ accredited program designed for
                     working professionals. Gain industry-relevant skills, learn

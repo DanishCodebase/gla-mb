@@ -269,8 +269,8 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-[url('/herobg-sm.png')] md:bg-[url('/herobg1.webp')] bg-cover bg-center">
-      {/* <div className="absolute inset-0 bg-black/50"></div> */}
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-[url('/herobg1.webp')] bg-cover bg-center">
+      <div className="absolute inset-0 md:hidden bg-black/50"></div>
       <div className="container max-w-7xl mx-auto px-4 py-16 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Content */}
@@ -282,9 +282,9 @@ export function HeroSection() {
             </div> */}
 
             {/* Main Headline */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-[50px] text-white leading-tight tracking-tight">
               Chart your Path with our{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-400 to-purple-300">
+              <span className="text-transparent bg-clip-text font-bold bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600">
                 Industry-Oriented
               </span>{" "}
               Specializations
@@ -292,7 +292,7 @@ export function HeroSection() {
 
             {/* Supporting Text */}
             <motion.div
-              className="bg-gradient-to-r from-blue-100 to-indigo-50 border-l-4 border-l-blue-500 border border-blue-200 rounded-xl p-5 w-fit"
+              className="bg-gradient-to-r from-green-600 to-amber-500 rounded-xl p-5 py-2 w-fit"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0, duration: 0.2 }}
@@ -301,7 +301,7 @@ export function HeroSection() {
                 {/*  */}
                 <div>
                   <motion.h3
-                    className="text-blue-700 font-bold text-2xl sm:text-3xl"
+                    className="text-white font-bold text-2xl sm:text-3xl"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1, duration: 0.5 }}
@@ -575,7 +575,7 @@ export function HeroSection() {
                   <Button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-4 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50"
+                    className="w-full bg-gradient-to-r from-green-600 animate-bounce to-green-500 hover:from-green-700 hover:to-green-700 text-white py-4 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50"
                   >
                     {isLoading ? (
                       <div className="flex items-center justify-center">
@@ -583,7 +583,7 @@ export function HeroSection() {
                         Processing...
                       </div>
                     ) : (
-                      "Get Free Consultation"
+                      "Submit Now"
                     )}
                   </Button>
 
