@@ -4,6 +4,8 @@ export const submitAdmissionQuery = async (formData, utmParams = {}) => {
   try {
     console.log("Raw form data received for new API:", formData);
     console.log("UTM parameters received:", utmParams);
+    console.log("State value:", formData.state);
+    console.log("City value:", formData.city);
 
     // Enhanced validation for required fields
     const requiredFields = ['name', 'email', 'phone', 'state', 'city'];

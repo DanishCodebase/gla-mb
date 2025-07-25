@@ -132,10 +132,10 @@ export function HeroSection() {
     });
 
     // Validate state and city
-    if (!formData.state) {
+    if (!formData.state || formData.state.trim() === "") {
       newErrors.state = "Please select a state";
     }
-    if (!formData.city) {
+    if (!formData.city || formData.city.trim() === "") {
       newErrors.city = "Please select a city";
     }
 
@@ -158,11 +158,43 @@ export function HeroSection() {
     setIsLoading(true);
 
     try {
+      // Additional validation to ensure all required fields are present
+      if (!formData.state || formData.state.trim() === "") {
+        toast.error("Please select a state");
+        setIsLoading(false);
+        return;
+      }
+      
+      if (!formData.city || formData.city.trim() === "") {
+        toast.error("Please select a city");
+        setIsLoading(false);
+        return;
+      }
+
+      // Double-check that form data is complete
+      const requiredFields = ['name', 'email', 'phone', 'state', 'city'];
+      const missingFields = requiredFields.filter(field => !formData[field] || formData[field].trim() === '');
+      
+      if (missingFields.length > 0) {
+        toast.error(`Missing required fields: ${missingFields.join(', ')}`);
+        setIsLoading(false);
+        return;
+      }
+
+      // Ensure form data is properly structured regardless of UTM parameters
       const sanitizedFormData = {
-        ...formData,
-        city: formData.city ? formData.city.replace(/\s/g, "") : "",
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        coursesid: formData.coursesid || "OGLAMBA201",
+        state: formData.state.trim(),
+        city: formData.city ? formData.city.trim().replace(/\s/g, "") : "",
         page: "glaOnlineMBA",
       };
+
+      // Log the data being sent for debugging
+      console.log("Submitting form data:", sanitizedFormData);
+      console.log("UTM parameters:", utmParams);
 
       // Prepare data with UTM parameters for sheets
       const dataForSheet = {

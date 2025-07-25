@@ -130,7 +130,7 @@ export function RankingsAccreditations() {
             ))}
           </Marquee>
           <Marquee
-            className="mb-8 sm:hidden"
+            className="mb-8 hidden"
             reverse={true}
             pauseOnHover={true}
           >
