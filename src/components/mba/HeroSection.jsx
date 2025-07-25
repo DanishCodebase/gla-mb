@@ -164,7 +164,7 @@ export function HeroSection() {
         setIsLoading(false);
         return;
       }
-      
+
       if (!formData.city || formData.city.trim() === "") {
         toast.error("Please select a city");
         setIsLoading(false);
@@ -172,11 +172,13 @@ export function HeroSection() {
       }
 
       // Double-check that form data is complete
-      const requiredFields = ['name', 'email', 'phone', 'state', 'city'];
-      const missingFields = requiredFields.filter(field => !formData[field] || formData[field].trim() === '');
-      
+      const requiredFields = ["name", "email", "phone", "state", "city"];
+      const missingFields = requiredFields.filter(
+        (field) => !formData[field] || formData[field].trim() === ""
+      );
+
       if (missingFields.length > 0) {
-        toast.error(`Missing required fields: ${missingFields.join(', ')}`);
+        toast.error(`Missing required fields: ${missingFields.join(", ")}`);
         setIsLoading(false);
         return;
       }
@@ -267,9 +269,7 @@ export function HeroSection() {
   };
 
   return (
-    <section
-      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-green-900 via-green-700 to-green-500 md:bg-[url('/herobg1.webp')] md:bg-cover md:bg-center"
-    >
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-[url('/herobg-sm.png')] md:bg-[url('/herobg1.webp')] bg-cover bg-center">
       {/* <div className="absolute inset-0 bg-black/50"></div> */}
       <div className="container max-w-7xl mx-auto px-4 py-16 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
