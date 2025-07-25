@@ -15,7 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getAllStates, getCitiesForState } from "@/lib/stateData";
-import { submitAdmissionQuery } from "@/lib/crm"; 
+import { submitAdmissionQuery } from "@/lib/crm";
 
 export function HeroSection() {
   const [formData, setFormData] = useState({
@@ -236,7 +236,7 @@ export function HeroSection() {
       <div className="container max-w-7xl mx-auto px-4 py-16 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Content */}
-          <div className="space-y-4 sm:space-y-8">
+          <div className="space-y-4 sm:space-y-6">
             {/* Badge */}
             <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full text-sm font-semibold shadow-lg">
               <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
@@ -253,14 +253,38 @@ export function HeroSection() {
             </h1>
 
             {/* Supporting Text */}
-            {/* <p className="text-lg md:text-xl text-white leading-relaxed max-w-2xl">
-              Transform your career with our accredited online MBA program.
-              Flexible learning, industry-relevant curriculum, and expert
-              faculty to help you achieve your professional goals.
-            </p> */}
+            <motion.div
+              className="bg-gradient-to-r from-blue-100 to-indigo-50 border-l-4 border-l-blue-500 border border-blue-200 rounded-xl p-5 max-w-2xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+            >
+              <div className="flex items-start gap-3">
+                {/*  */}
+                <div>
+                  <motion.h3
+                    className="text-blue-700 font-bold text-2xl sm:text-3xl"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1, duration: 0.5 }}
+                  >
+                    🎓 ADMISSIONS OPEN 2025
+                  </motion.h3>
+                  {/* <motion.p
+                    className="text-blue-600 text-base leading-relaxed"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.2, duration: 0.5 }}
+                  >
+                    Premium MBA education with flexible learning for ambitious
+                    professionals.
+                  </motion.p> */}
+                </div>
+              </div>
+            </motion.div>
 
             {/* Key Benefits */}
-            <div className="grid grid-cols-3 gap-6 pt-6">
+            <div className="grid grid-cols-3 gap-6">
               <div className="flex items-center space-x-3">
                 <div className="min-w-8 min-h-8 bg-green-100 rounded-full flex items-center justify-center">
                   <svg
@@ -277,7 +301,7 @@ export function HeroSection() {
                     />
                   </svg>
                 </div>
-                <span className="text-sm font-medium text-white">
+                <span className="text-sm sm:text-lg font-medium text-white">
                   100% Online
                 </span>
               </div>
@@ -297,7 +321,7 @@ export function HeroSection() {
                     />
                   </svg>
                 </div>
-                <span className="text-sm font-medium text-white">
+                <span className="text-sm sm:text-lg font-medium text-white">
                   AICTE Approved
                 </span>
               </div>
@@ -317,7 +341,7 @@ export function HeroSection() {
                     />
                   </svg>
                 </div>
-                <span className="text-sm font-medium text-white">
+                <span className="text-sm sm:text-lg font-medium text-white">
                   Flexible Schedule
                 </span>
               </div>
@@ -402,7 +426,9 @@ export function HeroSection() {
                       required
                     />
                     {errors.email && (
-                      <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.email}
+                      </p>
                     )}
                   </div>
 
@@ -428,7 +454,9 @@ export function HeroSection() {
                       required
                     />
                     {errors.phone && (
-                      <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.phone}
+                      </p>
                     )}
                   </div>
 
@@ -461,7 +489,9 @@ export function HeroSection() {
                         </SelectContent>
                       </Select>
                       {errors.state && (
-                        <p className="text-red-500 text-sm mt-1">{errors.state}</p>
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.state}
+                        </p>
                       )}
                     </div>
                     <div className="space-y-2">
@@ -492,7 +522,9 @@ export function HeroSection() {
                         </SelectContent>
                       </Select>
                       {errors.city && (
-                        <p className="text-red-500 text-sm mt-1">{errors.city}</p>
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.city}
+                        </p>
                       )}
                     </div>
                   </div>
