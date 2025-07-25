@@ -70,7 +70,6 @@ const initialFormData = {
   coursesid: "OGLAMBA201",
   state: "",
   city: "",
-  page: "amity",
 };
 
 export default function AdmissionQuery({ utmParams }) {
@@ -147,7 +146,14 @@ export default function AdmissionQuery({ utmParams }) {
       const sanitizedFormData = {
         ...formData,
         city: formData.city.replace(/\s/g, ""),
-        page: "glaOnlineMBA",
+      };
+      const dataForSheet = {
+        ...sanitizedFormData,
+        campaign: utmParams?.campaign || utmParams?.utm_campaign,
+        utm_source: utmParams?.utm_source || "Stealth", // Use URL parameter instead of hardcoding
+        utm_medium: utmParams?.utm_medium,
+        utm_term: utmParams?.utm_term,
+        utm_content: utmParams?.utm_content,
       };
 
       // PARALLEL API CALLS for faster submission
@@ -158,14 +164,7 @@ export default function AdmissionQuery({ utmParams }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            ...sanitizedFormData,
-            campaign: utmParams?.campaign || utmParams?.utm_campaign,
-            utm_source: "Stealth",
-            utm_medium: utmParams?.utm_medium,
-            utm_term: utmParams?.utm_term,
-            utm_content: utmParams?.utm_content,
-          }),
+          body: JSON.stringify(dataForSheet),
         }),
       ]);
 
@@ -184,6 +183,7 @@ export default function AdmissionQuery({ utmParams }) {
         setFormData(initialFormData);
         setErrors({});
         closeAdmissionForm();
+        // Immediate redirect
         window.location.href = "/thankyou.html";
       } else {
         // Handle error case
@@ -199,7 +199,9 @@ export default function AdmissionQuery({ utmParams }) {
             );
           }
         } else {
-          toast.error("Failed to submit form. Please try again.");
+          toast.error(
+            crmResult.message || "Failed to submit form. Please try again."
+          );
         }
       }
     } catch (error) {
@@ -228,7 +230,7 @@ export default function AdmissionQuery({ utmParams }) {
       <AnimatePresence>
         {!isAdmissionFormOpen && (
           <motion.button
-            className="fixed right-[8px] top-1/3 -translate-y-1/2 bg-gradient-to-r from-green-700 to-green-400 text-white px-8 py-4 -rotate-90 origin-right z-50 hover:shadow-lg transition-all duration-300 rounded-t-lg font-medium tracking-wide"
+            className="fixed right-[8px] top-1/3 -translate-y-1/2 bg-gradient-to-r from-green-700 to-green-400 text-white px-8 py-4 -rotate-90 origin-right z-50 hover:shadow-lg transition-all duration-300 rounded-t-lg font-medium tracking-wide hidden"
             onClick={openAdmissionForm}
             initial={{ x: 0 }}
             whileHover={{ x: -5, scale: 1.02 }}

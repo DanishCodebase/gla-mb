@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import {
@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { getAllStates, getCitiesForState } from "@/lib/stateData";
 import { submitAdmissionQuery } from "@/lib/crm";
+import { getUTMParams } from "@/lib/utils";
 
 export function HeroSection() {
   const [formData, setFormData] = useState({
@@ -31,6 +32,13 @@ export function HeroSection() {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [cities, setCities] = useState([]);
+  const [utmParams, setUtmParams] = useState({});
+
+  // Extract UTM parameters on component mount
+  useEffect(() => {
+    const utmData = getUTMParams();
+    setUtmParams(utmData);
+  }, []);
 
   const formFields = [
     {
@@ -156,22 +164,25 @@ export function HeroSection() {
         page: "glaOnlineMBA",
       };
 
+      // Prepare data with UTM parameters for sheets
+      const dataForSheet = {
+        ...sanitizedFormData,
+        campaign: utmParams?.utm_campaign || utmParams?.campaign || "",
+        utm_source: utmParams?.utm_source || "Stealth",
+        utm_medium: utmParams?.utm_medium || "",
+        utm_term: utmParams?.utm_term || "",
+        utm_content: utmParams?.utm_content || "",
+      };
+
       // PARALLEL API CALLS for faster submission
       const [crmResult, sheetsResponse] = await Promise.all([
-        submitAdmissionQuery(sanitizedFormData, {}),
+        submitAdmissionQuery(sanitizedFormData, utmParams),
         fetch("/api/submit", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            ...sanitizedFormData,
-            campaign: "",
-            utm_source: "Stealth",
-            utm_medium: "",
-            utm_term: "",
-            utm_content: "",
-          }),
+          body: JSON.stringify(dataForSheet),
         }),
       ]);
 
