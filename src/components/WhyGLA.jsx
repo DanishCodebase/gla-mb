@@ -88,10 +88,10 @@ export default function WhyGLA() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white lg:max-w-md">
             Why Choose GLA Online?
           </h2>
-          <p className="text-gray-300 text-lg lg:max-w-md lg:text-right">
+          {/* <p className="text-gray-300 text-lg lg:max-w-md lg:text-right">
             Our distinct online methods empower students to learn through
             innovative approaches.
-          </p>
+          </p> */}
         </div>
 
         {/* Features Grid */}

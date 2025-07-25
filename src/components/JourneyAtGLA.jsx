@@ -202,7 +202,7 @@ export default function JourneyAtGLA() {
             }`}
           >
             {/* Animated Badge */}
-            <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-full text-sm font-medium mb-8 shadow-lg hover:shadow-xl transition-all duration-500 group">
+            {/* <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-full text-sm font-medium mb-8 shadow-lg hover:shadow-xl transition-all duration-500 group">
               <div className="relative">
                 <Sparkles className="w-5 h-5 text-amber-500 animate-spin-slow" />
                 <div className="absolute inset-0 bg-amber-400 rounded-full blur-md opacity-30 animate-pulse-gentle"></div>
@@ -214,7 +214,7 @@ export default function JourneyAtGLA() {
                 <Star className="w-3 h-3 text-amber-600 fill-current animate-pulse" />
                 <span className="text-amber-700 text-xs font-bold">4.9</span>
               </div>
-            </div>
+            </div> */}
 
             {/* Main Heading with Advanced Animation */}
             <div className="relative mb-6">
@@ -246,7 +246,7 @@ export default function JourneyAtGLA() {
             </p>
 
             {/* Animated Stats */}
-            <div className="flex flex-wrap justify-center gap-8 mt-12">
+            {/* <div className="flex flex-wrap justify-center gap-8 mt-12">
               <div
                 className="flex items-center gap-3 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-slate-200/50 animate-fade-up"
                 style={{ animationDelay: "1s" }}
@@ -268,7 +268,7 @@ export default function JourneyAtGLA() {
                 <Check className="w-5 h-5 text-blue-500 animate-check" />
                 <span className="text-slate-700 font-semibold">AACSB Accredited</span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -543,7 +543,7 @@ export default function JourneyAtGLA() {
             </div>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-slate-600">
+            {/* <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-slate-600">
               {[
                 { icon: Star, text: "AACSB Accredited", delay: "1.8s" },
                 { icon: TrendingUp, text: "Top 50 MBA Program", delay: "2s" },
@@ -560,7 +560,7 @@ export default function JourneyAtGLA() {
                   <span className="font-medium">{item.text}</span>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

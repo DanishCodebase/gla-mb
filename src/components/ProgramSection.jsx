@@ -114,9 +114,9 @@ export default function ProgramSection() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4">
             Our Specialisations
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          {/* <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Our 8 specialisations covers all management aspects
-          </p>
+          </p> */}
         </div>
 
         {/* Programs Grid */}
