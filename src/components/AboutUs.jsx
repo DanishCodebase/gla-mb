@@ -45,14 +45,16 @@ const AboutUs = () => {
               <div className="flex-col justify-start lg:items-start items-center gap-4 flex">
                 <div className="w-full flex-col justify-start lg:items-start gap-3 flex">
                   <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold font-manrope sm:text-start text-center">
-                    About GLA Online
+                    About Our Online MBA Program
                   </h2>
                   <p className="text-gray-500 text-[17px] font-normal leading-relaxed sm:text-start text-center">
                     Start your career with GLA University's Online MBA — a
                     UGC-entitled, NAAC A+ accredited program designed for
                     working professionals. Gain industry-relevant skills, learn
                     from top faculty, and enjoy the flexibility of 100% online
-                    learning. Enroll now to lead with confidence!
+                    learning. The program combines live interactive sessions,
+                    self-paced learning, and practical projects. Enroll now to
+                    lead with confidence!
                   </p>
                 </div>
               </div>

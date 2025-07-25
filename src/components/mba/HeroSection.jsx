@@ -283,11 +283,11 @@ export function HeroSection() {
 
             {/* Main Headline */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
-              Get Your{" "}
+              Chart your Path with our{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-400 to-purple-300">
-                Online MBA
+                Industry-Oriented
               </span>{" "}
-              Degree in 2 Years
+              Specializations
             </h1>
 
             {/* Supporting Text */}
@@ -360,8 +360,11 @@ export function HeroSection() {
                     />
                   </svg>
                 </div>
-                <span className="text-sm sm:text-lg font-medium text-white">
+                {/* <span className="text-sm sm:text-lg font-medium text-white">
                   AICTE Approved
+                </span> */}
+                <span className="text-sm sm:text-lg font-medium text-white">
+                  UGC-Entitled
                 </span>
               </div>
               <div className="flex items-center space-x-3">
@@ -410,11 +413,11 @@ export function HeroSection() {
             >
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl font-bold text-slate-900">
-                  Get Free Consultation
+                  Enquire Now
                 </CardTitle>
-                <p className="text-slate-600 text-base">
+                {/* <p className="text-slate-600 text-base">
                   Speak with our admissions team today
-                </p>
+                </p> */}
               </CardHeader>
 
               <CardContent>
@@ -584,13 +587,13 @@ export function HeroSection() {
                     )}
                   </Button>
 
-                  <p className="text-xs text-slate-500 text-center leading-relaxed">
+                  {/* <p className="text-xs text-slate-500 text-center leading-relaxed">
                     By submitting this form, you agree to our{" "}
                     <a href="#" className="text-blue-600 hover:underline">
                       privacy policy
                     </a>{" "}
                     and consent to being contacted by our team.
-                  </p>
+                  </p> */}
                 </form>
               </CardContent>
             </Card>
