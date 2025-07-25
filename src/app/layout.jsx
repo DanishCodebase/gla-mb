@@ -20,24 +20,22 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        {/* Google Tag Manager */}
-        <GoogleTagManager gtmId="GTM-KQX3Q3RF" />
-        {/* End Google Tag Manager */}
-      </head>
+      {/* Google Tag Manager */}
+      <GoogleTagManager gtmId="GTM-KQX3Q3RF" />
+      {/* End Google Tag Manager */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* Google Tag Manager (noscript) */}
 
-        <noscript>
+        {/* <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-KQX3Q3RF"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
-        </noscript>
+        </noscript> */}
 
         {/* End Google Tag Manager (noscript) */}
         {children}
