@@ -85,7 +85,7 @@ export default function WhyGLA() {
       <div className="max-w-7xl mx-auto relative z-10 sm:px-4">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-12 gap-8">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white lg:max-w-md">
+          <h2 className="text-[26px] xs:text-3xl sm:text-4xl lg:text-5xl font-medium xs:font-bold text-white lg:max-w-md">
             Why Choose GLA Online?
           </h2>
           {/* <p className="text-gray-300 text-lg lg:max-w-md lg:text-right">

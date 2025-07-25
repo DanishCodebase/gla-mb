@@ -43,7 +43,7 @@ const AboutUs = () => {
             <div className="w-full flex-col justify-center items-start gap-8 flex">
               <div className="flex-col justify-start lg:items-start items-center gap-4 flex">
                 <div className="w-full flex-col justify-start lg:items-start gap-3 flex">
-                  <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold font-manrope sm:text-start text-center">
+                  <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold font-manrope sm:text-start text-justify">
                     About Our Online MBA Program
                   </h2>
                   <p className="text-gray-500 sm:text-[17px] font-normal leading-relaxed sm:text-start text-justify">

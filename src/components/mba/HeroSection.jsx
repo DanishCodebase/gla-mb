@@ -282,7 +282,7 @@ export function HeroSection() {
             </div> */}
 
             {/* Main Headline */}
-            <h1 className="text-4xl md:text-5xl lg:text-[50px] text-white leading-tight tracking-tight">
+            <h1 className="text-3xl xs:text-4xl md:text-5xl lg:text-[50px] text-white leading-tight tracking-tight">
               Chart your Path with our{" "}
               <span className="text-transparent bg-clip-text font-bold bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600">
                 Industry-Oriented
