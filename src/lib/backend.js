@@ -13,6 +13,15 @@ export const submitLead = async (apiPayload) => {
       ])
     );
 
+    // Log the processed payload to see what's being sent
+    console.log("Processed payload for API:", processedPayload);
+    console.log("State and City in processed payload:", {
+      State: processedPayload.State,
+      state: processedPayload.state,
+      City: processedPayload.City,
+      city: processedPayload.city
+    });
+
     const queryParams = new URLSearchParams(processedPayload).toString();
     const apiUrl = `${baseUrl}?${queryParams}`;
 

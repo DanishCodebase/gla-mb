@@ -160,7 +160,7 @@ export function HeroSection() {
     try {
       const sanitizedFormData = {
         ...formData,
-        city: formData.city.replace(/\s/g, ""),
+        city: formData.city ? formData.city.replace(/\s/g, "") : "",
         page: "glaOnlineMBA",
       };
 
@@ -236,12 +236,7 @@ export function HeroSection() {
 
   return (
     <section
-      style={{
-        backgroundImage: "url('/herobg1.webp')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-100/50"
+      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-green-900 via-green-700 to-green-500 md:bg-[url('/herobg1.webp')] md:bg-cover md:bg-center"
     >
       {/* <div className="absolute inset-0 bg-black/50"></div> */}
       <div className="container max-w-7xl mx-auto px-4 py-16 relative z-10">
@@ -249,15 +244,15 @@ export function HeroSection() {
           {/* Left Column - Content */}
           <div className="space-y-4 sm:space-y-6">
             {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full text-sm font-semibold shadow-lg">
+            {/* <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full text-sm font-semibold shadow-lg">
               <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
               UGC & AICTE Approved
-            </div>
+            </div> */}
 
             {/* Main Headline */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
               Get Your{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-purple-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-400 to-purple-300">
                 Online MBA
               </span>{" "}
               Degree in 2 Years
@@ -265,12 +260,12 @@ export function HeroSection() {
 
             {/* Supporting Text */}
             <motion.div
-              className="bg-gradient-to-r from-blue-100 to-indigo-50 border-l-4 border-l-blue-500 border border-blue-200 rounded-xl p-5 max-w-2xl"
+              className="bg-gradient-to-r from-blue-100 to-indigo-50 border-l-4 border-l-blue-500 border border-blue-200 rounded-xl p-5 w-fit"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
+              transition={{ delay: 0, duration: 0.2 }}
             >
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 w-fit">
                 {/*  */}
                 <div>
                   <motion.h3
@@ -279,7 +274,8 @@ export function HeroSection() {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1, duration: 0.5 }}
                   >
-                    🎓 ADMISSIONS OPEN 2025
+                    <span className="hidden sm:inline">🎓</span> ADMISSIONS OPEN
+                    2025
                   </motion.h3>
                   {/* <motion.p
                     className="text-blue-600 text-base leading-relaxed"
@@ -295,7 +291,7 @@ export function HeroSection() {
             </motion.div>
 
             {/* Key Benefits */}
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-3 sm:grid-cols-1 gap-6">
               <div className="flex items-center space-x-3">
                 <div className="min-w-8 min-h-8 bg-green-100 rounded-full flex items-center justify-center">
                   <svg
@@ -359,7 +355,7 @@ export function HeroSection() {
             </div>
 
             {/* CTA Button */}
-            <div className="pt-4">
+            {/* <div className="pt-4">
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
@@ -371,7 +367,7 @@ export function HeroSection() {
               >
                 Get Started Today
               </Button>
-            </div>
+            </div> */}
           </div>
 
           {/* Right Column - Contact Form */}

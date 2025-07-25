@@ -30,9 +30,9 @@ export async function POST(request) {
     // Parse JSON body
     const formData = await request.json();
 
-    // Validate required fields
+    // Validate required fields with better handling of empty strings
     const required = ["name", "email", "phone", "state", "city"];
-    const missing = required.filter((k) => !formData[k]);
+    const missing = required.filter((k) => !formData[k] || formData[k].trim() === '');
     if (missing.length > 0) {
       return new Response(
         JSON.stringify({
@@ -99,8 +99,13 @@ export async function POST(request) {
       );
     }
 
-    // 2. Write data
-    const writePayload = { ...formData, action: "writeData" };
+    // 2. Write data - ensure city and state are properly sanitized
+    const writePayload = { 
+      ...formData, 
+      city: formData.city ? formData.city.trim().replace(/\s/g, "") : "",
+      state: formData.state ? formData.state.trim() : "",
+      action: "writeData" 
+    };
     const writeResp = await fetch(googleScriptUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

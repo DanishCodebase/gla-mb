@@ -145,7 +145,7 @@ export default function AdmissionQuery({ utmParams }) {
     try {
       const sanitizedFormData = {
         ...formData,
-        city: formData.city.replace(/\s/g, ""),
+        city: formData.city ? formData.city.replace(/\s/g, "") : "",
       };
       const dataForSheet = {
         ...sanitizedFormData,

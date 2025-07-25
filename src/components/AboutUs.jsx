@@ -5,19 +5,23 @@ const AboutUs = () => {
     {
       title: "Flexible Schedule",
       description: "Weekend and evening classes to fit your work schedule",
+      bgColor: "bg-blue-100",
     },
     {
       title: "Comprehensive Curriculum",
       description: "Our 8 specialisations covers all management aspects",
+      bgColor: "bg-green-100",
     },
     {
       title: "Industry Focus",
       description:
         "Real-world projects and case studies from leading companies",
+      bgColor: "bg-yellow-100",
     },
     {
       title: "Professional Development",
       description: "Enhanced attitude and professional integrity development",
+      bgColor: "bg-red-100",
     },
   ];
 
@@ -25,9 +29,9 @@ const AboutUs = () => {
     e.preventDefault();
     const contactForm = document.getElementById("contact-form");
     if (contactForm) {
-      contactForm.scrollIntoView({ 
+      contactForm.scrollIntoView({
         behavior: "smooth",
-        block: "start"
+        block: "start",
       });
     }
   };
@@ -40,7 +44,7 @@ const AboutUs = () => {
             <div className="w-full flex-col justify-center items-start gap-8 flex">
               <div className="flex-col justify-start lg:items-start items-center gap-4 flex">
                 <div className="w-full flex-col justify-start lg:items-start gap-3 flex">
-                  <h2 className="text-indigo-700 text-3xl sm:text-4xl lg:text-5xl font-bold font-manrope sm:text-start text-center">
+                  <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold font-manrope sm:text-start text-center">
                     About GLA Online
                   </h2>
                   <p className="text-gray-500 text-[17px] font-normal leading-relaxed sm:text-start text-center">
@@ -57,7 +61,7 @@ const AboutUs = () => {
                   {features.map((feature, index) => (
                     <div
                       key={index}
-                      className="w-full h-full p-3.5 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-700 ease-in-out flex-col justify-start items-start gap-2.5 inline-flex"
+                      className={`w-full h-full p-3.5 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-700 ease-in-out flex-col justify-start items-start gap-2.5 inline-flex ${feature.bgColor}`}
                     >
                       <h4 className="text-gray-900 text-2xl font-bold font-manrope leading-9">
                         {feature.title}
@@ -70,8 +74,8 @@ const AboutUs = () => {
                 </div>
               </div>
             </div>
-            <a 
-              href="#contact-form" 
+            <a
+              href="#contact-form"
               onClick={handleApplyNowClick}
               className="sm:w-fit w-full group px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] transition-all duration-700 ease-in-out justify-center items-center flex"
             >
@@ -98,15 +102,9 @@ const AboutUs = () => {
             <div className="sm:w-[564px] w-full sm:h-[564px] h-full sm:bg-black/85 rounded-3xl sm:border border-gray-200 relative">
               <picture>
                 {/* Large devices - use about-lg.webp */}
-                <source
-                  media="(min-width: 1024px)"
-                  srcSet="/about-lg.webp"
-                />
+                <source media="(min-width: 1024px)" srcSet="/about-lg.webp" />
                 {/* Small and medium devices - use about.webp */}
-                <source
-                  media="(max-width: 1023px)"
-                  srcSet="/about.webp"
-                />
+                <source media="(max-width: 1023px)" srcSet="/about.webp" />
                 {/* Fallback image */}
                 <img
                   className="sm:mt-5 sm:ml-5 w-full h-full rounded-3xl object-cover"
