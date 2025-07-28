@@ -19,7 +19,7 @@ import { submitAdmissionQuery } from "@/lib/crm";
 import { getUTMParams } from "@/lib/utils";
 import Image from "next/image";
 
-export function HeroSection() {
+export function MobileHeroSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -91,6 +91,11 @@ export function HeroSection() {
       [name]: validateField(name, processedValue),
     }));
 
+    // Debug logging for state and city changes
+    if (name === "state" || name === "city") {
+      console.log(`handleChange - ${name}:`, processedValue);
+    }
+
     if (name === "state") {
       // Reset city when state changes
       setFormData((prev) => ({ ...prev, city: "" }));
@@ -147,6 +152,11 @@ export function HeroSection() {
       newErrors.city = "Please select a city";
     }
 
+    // Debug logging for form validation
+    console.log("Form validation - State:", formData.state);
+    console.log("Form validation - City:", formData.city);
+    console.log("Form validation - Errors:", newErrors);
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       toast.error("Please fill in all required fields correctly.");
@@ -181,16 +191,21 @@ export function HeroSection() {
     setIsLoading(true);
     setIsSubmitting(true);
 
+    // Small delay to ensure form state is properly updated
+    await new Promise(resolve => setTimeout(resolve, 100));
+
     try {
       // Additional validation to ensure all required fields are present
       if (!formData.state || formData.state.trim() === "") {
         toast.error("Please select a state");
+        console.error("State validation failed:", formData.state);
         setIsLoading(false);
         return;
       }
 
       if (!formData.city || formData.city.trim() === "") {
         toast.error("Please select a city");
+        console.error("City validation failed:", formData.city);
         setIsLoading(false);
         return;
       }
@@ -203,6 +218,8 @@ export function HeroSection() {
 
       if (missingFields.length > 0) {
         toast.error(`Missing required fields: ${missingFields.join(", ")}`);
+        console.error("Missing fields:", missingFields);
+        console.error("Form data at submission:", formData);
         setIsLoading(false);
         return;
       }
@@ -215,12 +232,19 @@ export function HeroSection() {
         coursesid: formData.coursesid || "OGLAMBA201",
         state: formData.state.trim(),
         city: formData.city ? formData.city.trim().replace(/\s/g, "") : "",
-        page: "glaOnlineMBA",
+        page: "getdegree.online",
       };
+
+      // Debug logging to check form data
+      console.log("Form data before sanitization:", formData);
+      console.log("Sanitized form data:", sanitizedFormData);
+      console.log("State value:", formData.state);
+      console.log("City value:", formData.city);
 
       // Log the data being sent for debugging
       console.log("Submitting form data:", sanitizedFormData);
       console.log("UTM parameters:", utmParams);
+      console.log("Form data state at submission:", formData);
 
       // Prepare data with UTM parameters for sheets
       const submissionId = `${formData.phone}_${Date.now()}`;
@@ -283,6 +307,7 @@ export function HeroSection() {
           "recentSubmissions",
           JSON.stringify(recentSubmissions)
         );
+        // Reset form data after successful submission
         setFormData({
           name: "",
           email: "",
@@ -290,9 +315,10 @@ export function HeroSection() {
           coursesid: "OGLAMBA201",
           state: "",
           city: "",
-          page: "glaOnlineMBA",
+          page: "getdegree.online",
         });
         setErrors({});
+        setCities([]); // Also reset cities array
         window.location.href = "/thankyou.html";
       } else {
         // Handle error case
@@ -328,20 +354,42 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen hidden sm:flex items-center overflow-hidden sm:bg-[url('/herobg1.webp')] bg-cover bg-center">
-      <div className="absolute inset-0 md:hidden bg-black/50"></div>
-      <div className="container max-w-7xl mx-auto px-4 py-8 sm:py-16 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Content */}
-          <div className="space-y-4 sm:space-y-6">
-            {/* Badge */}
-            {/* <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full text-sm font-semibold shadow-lg">
-              <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
-              UGC & AICTE Approved
-            </div> */}
+    <section className="relative min-h-screen block sm:hidden overflow-hidden bg-green-50">
+      <div className="absolute inset-0 opacity-5">
+        <div
+          className="w-full h-full"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, black 1px, transparent 1px), linear-gradient(black 1px, transparent 1px)",
+            backgroundSize: "20px 20px",
+          }}
+        ></div>
+      </div>
+      {/* University Image Section */}
+      <div className="relative h-40 sm:h-80 lg:h-96">
+        <Image
+          src="/gla.webp"
+          alt="University Campus"
+          fill
+          className="object-cover"
+          priority
+        />
+        {/* Dark overlay for better text contrast */}
+        <div className="absolute inset-0 bg-black/40"></div>
 
-            {/* Main Headline */}
-            <h1 className="text-3xl xs:text-4xl md:text-5xl lg:text-[50px] text-white leading-tight tracking-tight">
+        {/* University name overlay */}
+        {/* <div className="absolute top-4 left-4 text-white">
+          <h2 className="text-lg sm:text-xl font-bold">AMITY UNIVERSITY</h2>
+        </div> */}
+      </div>
+
+      {/* Content Section */}
+      <div className="px-4 py-8 sm:py-12">
+        <div className="max-w-md mx-auto">
+          {/* Main Heading */}
+          {/* Main Headline */}
+          <div className="space-y-4 sm:space-y-6">
+            <h1 className="text-3xl xs:text-4xl md:text-5xl lg:text-[50px] text-black leading-tight tracking-tight">
               Build a Future-Ready Career With a Practical{" "}
               <span className="text-transparent bg-clip-text font-bold bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600">
                 Online MBA
@@ -359,7 +407,7 @@ export function HeroSection() {
                 {/*  */}
                 <div>
                   <motion.h3
-                    className="text-white font-bold text-2xl sm:text-3xl"
+                    className="text-black font-bold text-2xl sm:text-3xl"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1, duration: 0.5 }}
@@ -379,95 +427,22 @@ export function HeroSection() {
                 </div>
               </div>
             </motion.div>
-
-            {/* Key Benefits */}
-            <div className="grid grid-cols-2 sm:grid-cols-1 gap-6">
-              <div className="flex items-center space-x-3">
-                <Image
-                  src="/naac.png"
-                  alt="NAAC 'A+' Accredited University"
-                  width={60}
-                  height={54}
-                  className="w-[60px] h-[54px]"
-                />
-                <span className="text-sm sm:text-lg font-medium text-white">
-                  NAAC 'A+' Accredited <br className="hidden sm:block" />{" "}
-                  University
-                </span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Image
-                  src="/money.png"
-                  alt="Fee: INR 105000/- (All Inclusive)"
-                  width={60}
-                  height={49}
-                  className="w-[60px] h-[49px]"
-                />
-                {/* <span className="text-sm sm:text-lg font-medium text-white">
-                  AICTE Approved
-                </span> */}
-                <span className="text-sm sm:text-lg font-medium text-white">
-                  Fee: INR 105000/- (All Inclusive)
-                </span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Image
-                  src="/calendar.png"
-                  alt="Duration: 24 Months"
-                  width={60}
-                  height={41}
-                  className="w-[60px] h-[41px]"
-                />
-                <span className="text-sm sm:text-lg font-medium text-white">
-                  Duration: 24 Months
-                </span>
-              </div>
-              <div className="flex sm:hidden items-center justify space-x-3">
-                <Image
-                  src="/emi.gif"
-                  alt="EMI"
-                  width={60}
-                  height={41}
-                  className="w-[60px] h-[49px] rounded-full"
-                />
-                <span className="text-sm sm:text-lg font-medium text-white">
-                  No Cost EMI Available
-                </span>
-              </div>
-            </div>
-
-            {/* CTA Button */}
-            {/* <div className="pt-4">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
-                onClick={() =>
-                  document
-                    .getElementById("contact-form")
-                    .scrollIntoView({ behavior: "smooth" })
-                }
-              >
-                Get Started Today
-              </Button>
-            </div> */}
           </div>
 
-          {/* Right Column - Contact Form */}
-          <div className="lg:pl-8">
-            <Card
-              id="contact-form"
-              className="bg-white/95 backdrop-blur-xl border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 max-w-sm mx-auto lg:ms-auto lg:mr-0"
-            >
+          {/* Application Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <Card className="bg-white border-2 mt-10 relative z-10 border-green-600 shadow-xl rounded-xl">
               <CardHeader className="text-center">
-                <CardTitle className="text-2xl font-bold text-slate-900">
-                  Enquire Now
+                <CardTitle className="text-xl font-bold text-slate-800">
+                  Apply Now
                 </CardTitle>
-                {/* <p className="text-slate-600 text-base">
-                  Speak with our admissions team today
-                </p> */}
               </CardHeader>
 
-              <CardContent>
+              <CardContent className="space-y-4">
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Name Field */}
                   <div className="space-y-2">
@@ -475,7 +450,7 @@ export function HeroSection() {
                       htmlFor="name"
                       className="text-sm font-semibold text-slate-700"
                     >
-                      Full Name *
+                      Name
                     </Label>
                     <Input
                       id="name"
@@ -500,7 +475,7 @@ export function HeroSection() {
                       htmlFor="email"
                       className="text-sm font-semibold text-slate-700"
                     >
-                      Email Address *
+                      E-mail Address
                     </Label>
                     <Input
                       id="email"
@@ -527,7 +502,7 @@ export function HeroSection() {
                       htmlFor="phone"
                       className="text-sm font-semibold text-slate-700"
                     >
-                      Mobile Number *
+                      Mobile Number
                     </Label>
                     <Input
                       id="phone"
@@ -622,29 +597,21 @@ export function HeroSection() {
                   <Button
                     type="submit"
                     disabled={isLoading || isSubmitting}
-                    className="w-full bg-gradient-to-r from-green-600 animate-bounce to-green-500 hover:from-green-700 hover:to-green-700 text-white py-4 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 text-lg rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50"
                   >
                     {isLoading ? (
                       <div className="flex items-center justify-center">
-                        <div className="rounded-full h-5 w-5 border-b-2 border-white mr-2 animate-spin"></div>
+                        <div className="rounded-full h-5 w-5 border-b-2 border-black mr-2 animate-spin"></div>
                         Processing...
                       </div>
                     ) : (
-                      "Submit Now"
+                      "SUBMIT"
                     )}
                   </Button>
-
-                  {/* <p className="text-xs text-slate-500 text-center leading-relaxed">
-                    By submitting this form, you agree to our{" "}
-                    <a href="#" className="text-blue-600 hover:underline">
-                      privacy policy
-                    </a>{" "}
-                    and consent to being contacted by our team.
-                  </p> */}
                 </form>
               </CardContent>
             </Card>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -8,12 +8,14 @@ import JourneyAtGLA from "@/components/JourneyAtGLA";
 import { HeroSection } from "@/components/mba/HeroSection";
 import AboutUs from "@/components/AboutUs";
 import Header from "@/components/Header";
+import { MobileHeroSection } from "@/components/mba/MobileHeroSection";
 
 export default function Home() {
   return (
     <main>
       <Header />
       <HeroSection />
+      <MobileHeroSection />
       <AboutUs />
       <ProgramSection />
       <Recruiters />

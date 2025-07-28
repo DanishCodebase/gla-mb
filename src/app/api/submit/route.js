@@ -29,6 +29,11 @@ export async function POST(request) {
   try {
     // Parse JSON body
     const formData = await request.json();
+    
+    // Debug logging to check received data
+    console.log("API received form data:", formData);
+    console.log("State in API:", formData.state);
+    console.log("City in API:", formData.city);
 
     // Validate required fields with better handling of empty strings
     const required = ["page","name", "email", "phone", "state", "city"];
@@ -80,6 +85,11 @@ export async function POST(request) {
       action: "checkAndWrite",
       submission_id: formData.submission_id || `${formData.phone}_${Date.now()}`
     };
+    
+    // Debug logging for Google Apps Script payload
+    console.log("Google Apps Script payload:", combinedPayload);
+    console.log("State in payload:", combinedPayload.state);
+    console.log("City in payload:", combinedPayload.city);
     
     const response = await fetch(googleScriptUrl, {
       method: "POST",
