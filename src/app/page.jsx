@@ -9,6 +9,7 @@ import { HeroSection } from "@/components/mba/HeroSection";
 import AboutUs from "@/components/AboutUs";
 import Header from "@/components/Header";
 import { MobileHeroSection } from "@/components/mba/MobileHeroSection";
+import { FixedApplyButton } from "@/components/FixedApplyButton";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <JourneyAtGLA />
       <Testimonials />
       {/* <OrbitingCircle /> */}
+      <FixedApplyButton />
     </main>
   );
 }

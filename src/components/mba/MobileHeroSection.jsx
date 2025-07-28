@@ -88,9 +88,10 @@ export function MobileHeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <LeadForm
+              id="contact"
               className="mt-10 relative z-10"
               cardClassName="bg-white border-2 border-green-600 shadow-xl rounded-xl"
-              title="Apply Now"
+              // title="Apply Now"
               submitButtonText="SUBMIT"
               componentName="MobileHeroSection"
             />

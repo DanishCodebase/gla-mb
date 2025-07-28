@@ -13,8 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "GLA University",
-  description: "GLA University",
+  title: "Best Online MBA | Flexible Learning | No Cost EMI | GLA Online MBA",
+  description: "Transform your career with an Online MBA from GLA University. Flexible, comprehensive, and designed for real-world impact. Enroll now",
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
 };
 
 export default function RootLayout({ children }) {

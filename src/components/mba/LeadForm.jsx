@@ -27,7 +27,8 @@ export function LeadForm({
   cardClassName = "",
   title = "Enquire Now",
   submitButtonText = "Submit Now",
-  componentName = "LeadForm"
+  componentName = "LeadForm",
+  id = ""
 }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -346,7 +347,7 @@ export function LeadForm({
   };
 
   return (
-    <div className={className}>
+    <div className={className} id={id}>
       <Card className={cardClassName}>
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold text-slate-900">

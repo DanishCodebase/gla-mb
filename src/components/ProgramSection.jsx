@@ -72,9 +72,16 @@ const programs = [
 ];
 
 export default function ProgramSection() {
+  const isMobile = window.innerWidth < 640; // sm breakpoint
+  let targetId; 
+  if (isMobile) {
+    targetId = "contact"; // Mobile form ID
+  } else {
+    targetId = "contact-form"; // Desktop form ID
+  }
   const handleApplyNowClick = (e) => {
     e.preventDefault();
-    const contactForm = document.getElementById("contact-form");
+    const contactForm = document.getElementById(targetId);
     if (contactForm) {
       contactForm.scrollIntoView({
         behavior: "smooth",

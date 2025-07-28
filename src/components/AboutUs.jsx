@@ -26,12 +26,43 @@ const AboutUs = () => {
 
   const handleApplyNowClick = (e) => {
     e.preventDefault();
-    const contactForm = document.getElementById("contact-form");
+    
+    // Check if we're on mobile or desktop
+    const isMobile = window.innerWidth < 640; // sm breakpoint
+    
+    let targetId;
+    if (isMobile) {
+      targetId = "contact"; // Mobile form ID
+    } else {
+      targetId = "contact-form"; // Desktop form ID
+    }
+    
+    console.log("AboutUs - Screen width:", window.innerWidth);
+    console.log("AboutUs - Is mobile:", isMobile);
+    console.log("AboutUs - Target ID:", targetId);
+    
+    const contactForm = document.getElementById(targetId);
+    console.log("AboutUs - Found form:", contactForm);
+    
     if (contactForm) {
+      console.log("AboutUs - Scrolling to form");
       contactForm.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
+    } else {
+      // Fallback: try both IDs
+      console.log("AboutUs - Trying fallback");
+      const fallbackForm = document.getElementById("contact") || document.getElementById("contact-form");
+      console.log("AboutUs - Fallback form found:", fallbackForm);
+      if (fallbackForm) {
+        fallbackForm.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      } else {
+        console.log("AboutUs - No form found!");
+      }
     }
   };
 
