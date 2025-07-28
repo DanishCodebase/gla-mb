@@ -17,6 +17,7 @@ import {
 import { getAllStates, getCitiesForState } from "@/lib/stateData";
 import { submitAdmissionQuery } from "@/lib/crm";
 import { getUTMParams } from "@/lib/utils";
+import Image from "next/image";
 
 export function HeroSection() {
   const [formData, setFormData] = useState({
@@ -155,19 +156,21 @@ export function HeroSection() {
     // Frontend check for duplicate phone number using localStorage
     let submittedPhoneNumbers =
       JSON.parse(localStorage.getItem("submittedPhoneNumbers")) || [];
-    
+
     // Check if this phone number was submitted in the last 5 minutes
     const now = Date.now();
-    const recentSubmissions = JSON.parse(localStorage.getItem("recentSubmissions")) || {};
+    const recentSubmissions =
+      JSON.parse(localStorage.getItem("recentSubmissions")) || {};
     const lastSubmissionTime = recentSubmissions[formData.phone];
-    
-    if (lastSubmissionTime && (now - lastSubmissionTime) < 300000) { // 5 minutes
+
+    if (lastSubmissionTime && now - lastSubmissionTime < 300000) {
+      // 5 minutes
       toast.warning(
         "This phone number was recently submitted. Please wait a few minutes before trying again."
       );
       return;
     }
-    
+
     if (submittedPhoneNumbers.includes(formData.phone)) {
       toast.warning(
         "This phone number has already been used to submit a query during this session."
@@ -273,10 +276,13 @@ export function HeroSection() {
             JSON.stringify(submittedPhoneNumbers)
           );
         }
-        
+
         // Update recent submissions timestamp
         recentSubmissions[formData.phone] = now;
-        localStorage.setItem("recentSubmissions", JSON.stringify(recentSubmissions));
+        localStorage.setItem(
+          "recentSubmissions",
+          JSON.stringify(recentSubmissions)
+        );
         setFormData({
           name: "",
           email: "",
@@ -304,10 +310,13 @@ export function HeroSection() {
         } else {
           toast.error("Failed to submit form. Please try again.");
         }
-        
+
         // Update recent submissions timestamp even on error to prevent spam
         recentSubmissions[formData.phone] = now;
-        localStorage.setItem("recentSubmissions", JSON.stringify(recentSubmissions));
+        localStorage.setItem(
+          "recentSubmissions",
+          JSON.stringify(recentSubmissions)
+        );
       }
     } catch (error) {
       toast.error("An unexpected error occurred. Please try again.");
@@ -321,7 +330,7 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-[url('/herobg1.webp')] bg-cover bg-center">
       <div className="absolute inset-0 md:hidden bg-black/50"></div>
-      <div className="container max-w-7xl mx-auto px-4 py-16 relative z-10">
+      <div className="container max-w-7xl mx-auto px-4 py-8 sm:py-16 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Content */}
           <div className="space-y-4 sm:space-y-6">
@@ -333,16 +342,15 @@ export function HeroSection() {
 
             {/* Main Headline */}
             <h1 className="text-3xl xs:text-4xl md:text-5xl lg:text-[50px] text-white leading-tight tracking-tight">
-              Chart your Path with our{" "}
+              Build a Future-Ready Career With a Practical{" "}
               <span className="text-transparent bg-clip-text font-bold bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600">
-                Industry-Oriented Online MBA
-              </span>{" "}
-              Specializations
+                Online MBA
+              </span>
             </h1>
 
             {/* Supporting Text */}
             <motion.div
-              className="bg-gradient-to-r from-green-600 to-amber-500 rounded-xl p-5 py-2 w-fit"
+              className="sm:bg-gradient-to-r from-green-600 to-amber-500 rounded-xl sm:p-5 sm:py-2 w-fit"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0, duration: 0.2 }}
@@ -373,68 +381,44 @@ export function HeroSection() {
             </motion.div>
 
             {/* Key Benefits */}
-            <div className="grid grid-cols-3 sm:grid-cols-1 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-1 gap-6">
               <div className="flex items-center space-x-3">
-                <div className="min-w-8 min-h-8 bg-green-100 rounded-full flex items-center justify-center">
-                  <svg
-                    className="w-4 h-4 text-green-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </div>
+                <Image
+                  src="/naac.png"
+                  alt="NAAC 'A+' Accredited University"
+                  width={60}
+                  height={54}
+                  className="w-[60px] h-[54px]"
+                />
                 <span className="text-sm sm:text-lg font-medium text-white">
-                  100% Online
+                  NAAC 'A+' Accredited <br className="hidden sm:block" /> University
                 </span>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="min-w-8 min-h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                  <svg
-                    className="w-4 h-4 text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
+                <Image
+                  src="/money.png"
+                  alt="Fee: INR 105000/- (All Inclusive)"
+                  width={60}
+                  height={49}
+                  className="w-[60px] h-[49px]"
+                />
                 {/* <span className="text-sm sm:text-lg font-medium text-white">
                   AICTE Approved
                 </span> */}
                 <span className="text-sm sm:text-lg font-medium text-white">
-                  UGC-Entitled
+                  Fee: INR 105000/- (All Inclusive)
                 </span>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="min-w-8 min-h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                  <svg
-                    className="w-4 h-4 text-purple-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
+               <Image
+                  src="/calendar.png"
+                  alt="Duration: 24 Months"
+                  width={60}
+                  height={41}
+                  className="w-[60px] h-[41px]"
+                />
                 <span className="text-sm sm:text-lg font-medium text-white">
-                  Flexible Schedule
+                  Duration: 24 Months
                 </span>
               </div>
             </div>
