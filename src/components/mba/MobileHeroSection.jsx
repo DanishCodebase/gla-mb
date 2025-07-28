@@ -261,10 +261,12 @@ export function MobileHeroSection() {
       // SUBMIT TO CRM FIRST (more important)
       let crmResult = { success: false };
       try {
+        console.log("MobileHeroSection - About to submit to CRM with data:", sanitizedFormData);
+        console.log("MobileHeroSection - UTM params:", utmParams);
         crmResult = await submitAdmissionQuery(sanitizedFormData, utmParams);
-        console.log("CRM submission result:", crmResult);
+        console.log("MobileHeroSection - CRM submission result:", crmResult);
       } catch (crmError) {
-        console.error("CRM submission failed:", crmError);
+        console.error("MobileHeroSection - CRM submission failed:", crmError);
         crmResult = { success: false, error: crmError.message };
       }
 

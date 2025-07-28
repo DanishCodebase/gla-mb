@@ -125,6 +125,7 @@ export function HeroSection() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("HeroSection - Form submission started");
 
     // Prevent multiple submissions
     if (isSubmitting) {
@@ -150,8 +151,11 @@ export function HeroSection() {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       toast.error("Please fill in all required fields correctly.");
+      console.log("HeroSection - Form validation failed:", newErrors);
       return;
     }
+    
+    console.log("HeroSection - Form validation passed");
 
     // Frontend check for duplicate phone number using localStorage
     let submittedPhoneNumbers =
@@ -182,6 +186,7 @@ export function HeroSection() {
     setIsSubmitting(true);
 
     try {
+      console.log("HeroSection - Starting form submission process");
       // Additional validation to ensure all required fields are present
       if (!formData.state || formData.state.trim() === "") {
         toast.error("Please select a state");
@@ -215,7 +220,7 @@ export function HeroSection() {
         coursesid: formData.coursesid || "OGLAMBA201",
         state: formData.state.trim(),
         city: formData.city ? formData.city.trim().replace(/\s/g, "") : "",
-        page: "glaOnlineMBA",
+        page: "getdegree.online",
       };
 
       // Log the data being sent for debugging
@@ -237,10 +242,12 @@ export function HeroSection() {
       // SUBMIT TO CRM FIRST (more important)
       let crmResult = { success: false };
       try {
+        console.log("HeroSection - About to submit to CRM with data:", sanitizedFormData);
+        console.log("HeroSection - UTM params:", utmParams);
         crmResult = await submitAdmissionQuery(sanitizedFormData, utmParams);
-        console.log("CRM submission result:", crmResult);
+        console.log("HeroSection - CRM submission result:", crmResult);
       } catch (crmError) {
-        console.error("CRM submission failed:", crmError);
+        console.error("HeroSection - CRM submission failed:", crmError);
         crmResult = { success: false, error: crmError.message };
       }
 
@@ -290,7 +297,7 @@ export function HeroSection() {
           coursesid: "OGLAMBA201",
           state: "",
           city: "",
-          page: "glaOnlineMBA",
+          page: "getdegree.online",
         });
         setErrors({});
         window.location.href = "/thankyou.html";
