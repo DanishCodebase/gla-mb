@@ -31,7 +31,7 @@ export async function POST(request) {
     const formData = await request.json();
 
     // Validate required fields with better handling of empty strings
-    const required = ["name", "email", "phone", "state", "city"];
+    const required = ["page","name", "email", "phone", "state", "city"];
     const missing = required.filter((k) => !formData[k] || formData[k].trim() === '');
     if (missing.length > 0) {
       return new Response(
@@ -70,21 +70,30 @@ export async function POST(request) {
 
     // Google Apps Script integration
     const googleScriptUrl =
-      "https://script.google.com/macros/s/AKfycby_ttQOhWBpXMuRuYaT-M4cEAxneKAj9fw1mMZEVno4pd_ysy_-GwVKdPxzXIRqtDvrgw/exec";
+      "https://script.google.com/macros/s/AKfycbwNlNdUk0dhyu3rXla1HkHskibDUOjRQ6nXzrB7lFcnsAuJIRUf0Q94FSgGjKG6_mBJ/exec";
 
-    // 1. Check duplicate phone
-    const checkResp = await fetch(googleScriptUrl, {
+    // Combined check and write operation to prevent duplicates
+    const combinedPayload = { 
+      ...formData, 
+      city: formData.city ? formData.city.trim().replace(/\s/g, "") : "",
+      state: formData.state ? formData.state.trim() : "",
+      action: "checkAndWrite",
+      submission_id: formData.submission_id || `${formData.phone}_${Date.now()}`
+    };
+    
+    const response = await fetch(googleScriptUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "checkPhone", phone: formData.phone }),
+      body: JSON.stringify(combinedPayload),
     });
 
-    if (!checkResp.ok) {
-      throw new Error(`Google Script check failed: ${checkResp.status}`);
+    if (!response.ok) {
+      throw new Error(`Google Script failed: ${response.status}`);
     }
 
-    const checkResult = await checkResp.json();
-    if (checkResult.isDuplicate === true) {
+    const result = await response.json();
+    
+    if (result.isDuplicate === true) {
       return new Response(
         JSON.stringify({
           success: false,
@@ -99,30 +108,11 @@ export async function POST(request) {
       );
     }
 
-    // 2. Write data - ensure city and state are properly sanitized
-    const writePayload = { 
-      ...formData, 
-      city: formData.city ? formData.city.trim().replace(/\s/g, "") : "",
-      state: formData.state ? formData.state.trim() : "",
-      action: "writeData" 
-    };
-    const writeResp = await fetch(googleScriptUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(writePayload),
-    });
-
-    if (!writeResp.ok) {
-      throw new Error(`Google Script write failed: ${writeResp.status}`);
-    }
-
-    const writeResult = await writeResp.json();
-
-    if (writeResult.success === true) {
+    if (result.success === true) {
       return new Response(
         JSON.stringify({
           success: true,
-          message: writeResult.message || "Form submitted successfully.",
+          message: result.message || "Form submitted successfully.",
         }),
         {
           status: 200,
@@ -134,7 +124,7 @@ export async function POST(request) {
         JSON.stringify({
           success: false,
           message:
-            writeResult.message ||
+            result.message ||
             "Data submission failed due to script error.",
         }),
         {

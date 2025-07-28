@@ -26,13 +26,14 @@ export function HeroSection() {
     coursesid: "OGLAMBA201",
     state: "",
     city: "",
-    page: "glaOnlineMBA",
+    page: "getdegree.online",
   });
 
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [cities, setCities] = useState([]);
   const [utmParams, setUtmParams] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Extract UTM parameters on component mount
   useEffect(() => {
@@ -124,6 +125,12 @@ export function HeroSection() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Prevent multiple submissions
+    if (isSubmitting) {
+      toast.warning("Form is already being submitted. Please wait...");
+      return;
+    }
+
     // Validate all fields
     const newErrors = {};
     formFields.forEach((field) => {
@@ -148,6 +155,19 @@ export function HeroSection() {
     // Frontend check for duplicate phone number using localStorage
     let submittedPhoneNumbers =
       JSON.parse(localStorage.getItem("submittedPhoneNumbers")) || [];
+    
+    // Check if this phone number was submitted in the last 5 minutes
+    const now = Date.now();
+    const recentSubmissions = JSON.parse(localStorage.getItem("recentSubmissions")) || {};
+    const lastSubmissionTime = recentSubmissions[formData.phone];
+    
+    if (lastSubmissionTime && (now - lastSubmissionTime) < 300000) { // 5 minutes
+      toast.warning(
+        "This phone number was recently submitted. Please wait a few minutes before trying again."
+      );
+      return;
+    }
+    
     if (submittedPhoneNumbers.includes(formData.phone)) {
       toast.warning(
         "This phone number has already been used to submit a query during this session."
@@ -156,6 +176,7 @@ export function HeroSection() {
     }
 
     setIsLoading(true);
+    setIsSubmitting(true);
 
     try {
       // Additional validation to ensure all required fields are present
@@ -199,8 +220,10 @@ export function HeroSection() {
       console.log("UTM parameters:", utmParams);
 
       // Prepare data with UTM parameters for sheets
+      const submissionId = `${formData.phone}_${Date.now()}`;
       const dataForSheet = {
         ...sanitizedFormData,
+        submission_id: submissionId,
         campaign: utmParams?.utm_campaign || utmParams?.campaign || "",
         utm_source: utmParams?.utm_source || "Stealth",
         utm_medium: utmParams?.utm_medium || "",
@@ -208,22 +231,40 @@ export function HeroSection() {
         utm_content: utmParams?.utm_content || "",
       };
 
-      // PARALLEL API CALLS for faster submission
-      const [crmResult, sheetsResponse] = await Promise.all([
-        submitAdmissionQuery(sanitizedFormData, utmParams),
-        fetch("/api/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataForSheet),
-        }),
-      ]);
+      // SUBMIT TO CRM FIRST (more important)
+      let crmResult = { success: false };
+      try {
+        crmResult = await submitAdmissionQuery(sanitizedFormData, utmParams);
+        console.log("CRM submission result:", crmResult);
+      } catch (crmError) {
+        console.error("CRM submission failed:", crmError);
+        crmResult = { success: false, error: crmError.message };
+      }
 
-      const sheetsData = await sheetsResponse.json();
+      // Only submit to sheets if CRM was successful
+      let sheetsData = { success: false };
+      if (crmResult.success) {
+        try {
+          const sheetsResponse = await fetch("/api/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataForSheet),
+          });
 
-      // Handle success case
-      if (crmResult.success || sheetsData.success) {
+          sheetsData = await sheetsResponse.json();
+          console.log("Sheets submission result:", sheetsData);
+        } catch (sheetsError) {
+          console.error("Sheets submission failed:", sheetsError);
+          sheetsData = { success: false, error: sheetsError.message };
+        }
+      } else {
+        console.log("Skipping sheets submission because CRM failed");
+      }
+
+      // Handle success case - CRM success is primary
+      if (crmResult.success) {
         toast.success("Form submitted successfully!");
         if (!submittedPhoneNumbers.includes(formData.phone)) {
           submittedPhoneNumbers.push(formData.phone);
@@ -232,6 +273,10 @@ export function HeroSection() {
             JSON.stringify(submittedPhoneNumbers)
           );
         }
+        
+        // Update recent submissions timestamp
+        recentSubmissions[formData.phone] = now;
+        localStorage.setItem("recentSubmissions", JSON.stringify(recentSubmissions));
         setFormData({
           name: "",
           email: "",
@@ -259,12 +304,17 @@ export function HeroSection() {
         } else {
           toast.error("Failed to submit form. Please try again.");
         }
+        
+        // Update recent submissions timestamp even on error to prevent spam
+        recentSubmissions[formData.phone] = now;
+        localStorage.setItem("recentSubmissions", JSON.stringify(recentSubmissions));
       }
     } catch (error) {
       toast.error("An unexpected error occurred. Please try again.");
       console.error("Form submission error:", error);
     } finally {
       setIsLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -285,7 +335,7 @@ export function HeroSection() {
             <h1 className="text-3xl xs:text-4xl md:text-5xl lg:text-[50px] text-white leading-tight tracking-tight">
               Chart your Path with our{" "}
               <span className="text-transparent bg-clip-text font-bold bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600">
-                Industry-Oriented
+                Industry-Oriented Online MBA
               </span>{" "}
               Specializations
             </h1>
@@ -574,7 +624,7 @@ export function HeroSection() {
                   {/* Submit Button */}
                   <Button
                     type="submit"
-                    disabled={isLoading}
+                    disabled={isLoading || isSubmitting}
                     className="w-full bg-gradient-to-r from-green-600 animate-bounce to-green-500 hover:from-green-700 hover:to-green-700 text-white py-4 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50"
                   >
                     {isLoading ? (
