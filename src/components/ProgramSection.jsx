@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 
@@ -72,21 +73,59 @@ const programs = [
 ];
 
 export default function ProgramSection() {
-  const isMobile = window.innerWidth < 640; // sm breakpoint
-  let targetId; 
-  if (isMobile) {
-    targetId = "contact"; // Mobile form ID
-  } else {
-    targetId = "contact-form"; // Desktop form ID
-  }
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    // Initial check
+    checkScreenSize();
+
+    // Add event listener for window resize
+    window.addEventListener('resize', checkScreenSize);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
   const handleApplyNowClick = (e) => {
     e.preventDefault();
+    
+    let targetId;
+    if (isMobile) {
+      targetId = "contact"; // Mobile form ID
+    } else {
+      targetId = "contact-form"; // Desktop form ID
+    }
+    
+    console.log("ProgramSection - Screen width:", window.innerWidth);
+    console.log("ProgramSection - Is mobile:", isMobile);
+    console.log("ProgramSection - Target ID:", targetId);
+    
     const contactForm = document.getElementById(targetId);
+    console.log("ProgramSection - Found form:", contactForm);
+    
     if (contactForm) {
+      console.log("ProgramSection - Scrolling to form");
       contactForm.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
+    } else {
+      // Fallback: try both IDs
+      console.log("ProgramSection - Trying fallback");
+      const fallbackForm = document.getElementById("contact") || document.getElementById("contact-form");
+      console.log("ProgramSection - Fallback form found:", fallbackForm);
+      if (fallbackForm) {
+        fallbackForm.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      } else {
+        console.log("ProgramSection - No form found!");
+      }
     }
   };
   return (

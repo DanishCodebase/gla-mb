@@ -24,27 +24,55 @@ export default function JourneyAtGLA() {
   const [activeStep, setActiveStep] = useState(0)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [particles, setParticles] = useState([])
+  const [isMobile, setIsMobile] = useState(false)
   const sectionRef = useRef(null)
 
   const handleApplyNowClick = (e) => {
     e.preventDefault();
-    const isMobile = window.innerWidth < 640; // sm breakpoint
+    
     let targetId;
     if (isMobile) {
       targetId = "contact"; // Mobile form ID
     } else {
       targetId = "contact-form"; // Desktop form ID
     }
+    
+    console.log("JourneyAtGLA - Screen width:", window.innerWidth);
+    console.log("JourneyAtGLA - Is mobile:", isMobile);
+    console.log("JourneyAtGLA - Target ID:", targetId);
+    
     const contactForm = document.getElementById(targetId);
+    console.log("JourneyAtGLA - Found form:", contactForm);
+    
     if (contactForm) {
+      console.log("JourneyAtGLA - Scrolling to form");
       contactForm.scrollIntoView({ 
         behavior: "smooth",
         block: "start"
       });
+    } else {
+      // Fallback: try both IDs
+      console.log("JourneyAtGLA - Trying fallback");
+      const fallbackForm = document.getElementById("contact") || document.getElementById("contact-form");
+      console.log("JourneyAtGLA - Fallback form found:", fallbackForm);
+      if (fallbackForm) {
+        fallbackForm.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      } else {
+        console.log("JourneyAtGLA - No form found!");
+      }
     }
   };
   useEffect(() => {
     setIsVisible(true)
+
+    // Check screen size for mobile/desktop detection
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    checkScreenSize();
 
     // Generate particles
     const newParticles = Array.from({ length: 20 }, (_, i) => ({
@@ -78,11 +106,13 @@ export default function JourneyAtGLA() {
     }
 
     window.addEventListener("mousemove", handleMouseMove)
+    window.addEventListener('resize', checkScreenSize);
 
     return () => {
       clearTimeout(timer)
       clearInterval(stepTimer)
       window.removeEventListener("mousemove", handleMouseMove)
+      window.removeEventListener('resize', checkScreenSize);
     }
   }, [])
 

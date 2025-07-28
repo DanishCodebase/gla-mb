@@ -1,6 +1,24 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
 const AboutUs = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    // Initial check
+    checkScreenSize();
+
+    // Add event listener for window resize
+    window.addEventListener('resize', checkScreenSize);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
   const features = [
     {
       title: "Flexible Learning Schedule",
@@ -26,9 +44,6 @@ const AboutUs = () => {
 
   const handleApplyNowClick = (e) => {
     e.preventDefault();
-    
-    // Check if we're on mobile or desktop
-    const isMobile = window.innerWidth < 640; // sm breakpoint
     
     let targetId;
     if (isMobile) {
