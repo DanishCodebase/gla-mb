@@ -391,7 +391,8 @@ export function HeroSection() {
                   className="w-[60px] h-[54px]"
                 />
                 <span className="text-sm sm:text-lg font-medium text-white">
-                  NAAC 'A+' Accredited <br className="hidden sm:block" /> University
+                  NAAC 'A+' Accredited <br className="hidden sm:block" />{" "}
+                  University
                 </span>
               </div>
               <div className="flex items-center space-x-3">
@@ -410,7 +411,7 @@ export function HeroSection() {
                 </span>
               </div>
               <div className="flex items-center space-x-3">
-               <Image
+                <Image
                   src="/calendar.png"
                   alt="Duration: 24 Months"
                   width={60}
@@ -420,6 +421,15 @@ export function HeroSection() {
                 <span className="text-sm sm:text-lg font-medium text-white">
                   Duration: 24 Months
                 </span>
+              </div>
+              <div className="flex sm:hidden items-center justify-center space-x-3">
+                <Image
+                  src="/emi.gif"
+                  alt="EMI"
+                  width={60}
+                  height={41}
+                  className="w-[60px] h-[49px] rounded-full"
+                />
               </div>
             </div>
 
