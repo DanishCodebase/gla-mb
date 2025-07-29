@@ -18,16 +18,16 @@ export function MobileHeroSection() {
         ></div>
       </div>
       {/* University Image Section */}
-      <div className="relative h-48 sm:h-80 lg:h-96">
+      <div className="relative h-60 sm:h-80 lg:h-96">
         <Image
-          src="/herobg.png"
+          src="/mobile-hero.jpg"
           alt="University Campus"
           fill
           className="object-cover"
           priority
         />
         {/* Dark overlay for better text contrast */}
-        <div className="absolute inset-0 bg-black/40"></div>
+        {/* <div className="absolute inset-0 bg-black/40"></div> */}
 
         {/* University name overlay */}
         {/* <div className="absolute top-4 left-4 text-white">
