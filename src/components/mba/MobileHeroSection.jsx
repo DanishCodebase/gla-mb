@@ -20,7 +20,7 @@ export function MobileHeroSection() {
       {/* University Image Section */}
       <div className="relative h-40 sm:h-80 lg:h-96">
         <Image
-          src="/gla.webp"
+          src="/herobg.png"
           alt="University Campus"
           fill
           className="object-cover"
