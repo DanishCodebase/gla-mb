@@ -18,7 +18,7 @@ export function MobileHeroSection() {
         ></div>
       </div>
       {/* University Image Section */}
-      <div className="relative h-40 sm:h-80 lg:h-96">
+      <div className="relative h-48 sm:h-80 lg:h-96">
         <Image
           src="/herobg.png"
           alt="University Campus"
