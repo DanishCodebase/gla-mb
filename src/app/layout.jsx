@@ -1,6 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { GoogleTagManager } from "@next/third-parties/google";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,11 +16,12 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Best Online MBA | Flexible Learning | No Cost EMI | GLA Online MBA",
-  description: "Transform your career with an Online MBA from GLA University. Flexible, comprehensive, and designed for real-world impact. Enroll now",
+  description:
+    "Transform your career with an Online MBA from GLA University. Flexible, comprehensive, and designed for real-world impact. Enroll now",
   icons: {
-    icon: '/favicon.png',
-    shortcut: '/favicon.png',
-    apple: '/favicon.png',
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
 };
 
@@ -43,7 +46,9 @@ export default function RootLayout({ children }) {
         </noscript>
 
         {/* End Google Tag Manager (noscript) */}
-        {children}
+        <Header />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

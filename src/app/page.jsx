@@ -14,7 +14,7 @@ import { FixedApplyButton } from "@/components/FixedApplyButton";
 export default function Home() {
   return (
     <main>
-      <Header />
+      {/* <Header /> */}
       <HeroSection />
       <MobileHeroSection />
       <AboutUs />
