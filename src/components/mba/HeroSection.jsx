@@ -43,7 +43,7 @@ export function HeroSection() {
                     transition={{ delay: 1, duration: 0.5 }}
                   >
                     <span className="hidden sm:inline">🎓</span> ADMISSIONS OPEN
-                    2025
+                    2026
                   </motion.h3>
                   {/* <motion.p
                     className="text-blue-600 text-base leading-relaxed"
