@@ -149,9 +149,11 @@ const AboutUs = () => {
             <div className="sm:w-[564px] w-full sm:h-[564px] h-full sm:bg-black/85 rounded-3xl sm:border border-gray-200 relative">
               <picture>
                 {/* Large devices - use about-lg.webp */}
-                <source media="(min-width: 1024px)" srcSet="/about-lg.webp" />
+                {/* <source media="(min-width: 1024px)" srcSet="/about-lg.webp" /> */}
+                <source media="(min-width: 1024px)" srcSet="https://gomba.online/images/building.webp" />
                 {/* Small and medium devices - use about.webp */}
-                <source media="(max-width: 1023px)" srcSet="/about.webp" />
+                {/* <source media="(max-width: 1023px)" srcSet="/about.webp" /> */}
+                <source media="(max-width: 1023px)" srcSet="https://gomba.online/images/building.webp" />
                 {/* Fallback image */}
                 <img
                   className="sm:mt-5 sm:ml-5 w-full h-full rounded-3xl object-cover"
