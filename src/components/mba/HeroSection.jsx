@@ -73,21 +73,21 @@ export function HeroSection() {
                   University
                 </span>
               </div>
-              <div className="flex items-center space-x-3">
+              {/* <div className="flex items-center space-x-3">
                 <Image
                   src="/money.png"
                   alt="Fee: INR 105000/- (All Inclusive)"
                   width={60}
                   height={49}
                   className="w-[60px] h-[49px]"
-                />
+                /> */}
                 {/* <span className="text-sm sm:text-lg font-medium text-white">
                   AICTE Approved
                 </span> */}
-                <span className="text-sm sm:text-lg font-medium text-white">
+                {/* <span className="text-sm sm:text-lg font-medium text-white">
                   Fee: INR 105000/- (All Inclusive)
                 </span>
-              </div>
+              </div> */}
               <div className="flex items-center space-x-3">
                 <Image
                   src="/calendar.png"
